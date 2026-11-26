@@ -111,7 +111,7 @@ export const PARKS_DATA = [
 			borderTint: '#FECACA',
 			shadowTint: 'rgba(220, 38, 38, 0.16)'
 		},
-		image: '/Tarzāns-Adventure Park.jpg',
+		image: '/Tarzans-Adventure-Park.jpg',
 		themeSentence:
 			'Experience the forest through movement, discovery, and physical challenges ranging from ground bike trails to treetop obstacle heights.',
 		tagline: 'Discover what you are capable of in the canopy.',
