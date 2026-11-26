@@ -16,6 +16,8 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
+		"@emnapi/core": "^2.0.0-beta.2",
+		"@emnapi/runtime": "^1.11.3",
 		"@eslint/js": "^10.0.1",
 		"@sveltejs/adapter-auto": "^8.0.1",
 		"@sveltejs/adapter-cloudflare": "^9.0.1",
