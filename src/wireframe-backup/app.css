@@ -1,0 +1,85 @@
+:root {
+	--font-sans:
+		'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		sans-serif;
+	--font-serif: 'Playfair Display', Georgia, serif;
+
+	--bg-canvas: #f8faf8;
+	--bg-surface: #ffffff;
+	--bg-panel: #e5e8e5;
+	--bg-panel-light: #eff2ef;
+	--bg-panel-hover: #dbe0db;
+
+	--text-primary: #121814;
+	--text-secondary: #4a564e;
+	--text-tertiary: #718175;
+
+	--border-bold: #1a1e1b;
+	--border-subtle: #d3dbd4;
+
+	--color-forest: #1f4f34;
+	--color-forest-hover: #163b27;
+	--color-sage: #8ba888;
+	--color-cream: #fbfbfa;
+
+	--status-open-bg: #e6f6ec;
+	--status-open-text: #1d743a;
+	--status-open-border: #9dd8b0;
+
+	--status-closed-bg: #fdeeee;
+	--status-closed-text: #c0392b;
+	--status-closed-border: #f8b4ab;
+
+	--radius-sm: 8px;
+	--radius-md: 14px;
+	--radius-lg: 20px;
+	--radius-xl: 28px;
+	--radius-pill: 9999px;
+
+	--shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.04);
+	--shadow-card: 0 4px 20px rgba(18, 24, 20, 0.06);
+	--shadow-hover: 0 16px 36px rgba(18, 24, 20, 0.12);
+
+	--transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+	--transition-smooth: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-family: var(--font-sans);
+	color: var(--text-primary);
+	background-color: var(--bg-canvas);
+	scroll-behavior: smooth;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	min-height: 100vh;
+	line-height: 1.55;
+	overflow-x: hidden;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+button {
+	font-family: inherit;
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}

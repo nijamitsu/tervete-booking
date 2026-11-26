@@ -1,0 +1,185 @@
+:root,
+[data-theme='lvm'] {
+	--font-sans:
+		'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		sans-serif;
+	--font-serif: 'Playfair Display', Georgia, serif;
+
+	/* Official LVM Atpūta Color System (https://atputa.lvm.lv) */
+	--color-forest: #046241;
+	--color-forest-hover: #004d32;
+	--color-forest-dark: #00291b;
+	--color-forest-light: #eaf5ef;
+	--color-sage: #96b693;
+	--color-sage-light: #f2f7f3;
+	--color-yellow: #e2aa18;
+
+	--bg-canvas: #fafbfa;
+	--bg-surface: #ffffff;
+	--bg-panel: #edf4ef;
+	--bg-panel-light: #f6faf7;
+	--bg-panel-hover: #e2ede5;
+
+	--text-primary: #16201a;
+	--text-secondary: #435448;
+	--text-tertiary: #6e8073;
+
+	--border-color: #d6e3da;
+	--border-subtle: #e6efe8;
+	--border-width: 1px;
+
+	--status-open-bg: #e6f4ed;
+	--status-open-text: #046241;
+	--status-open-border: #a8d5bc;
+
+	--status-closed-bg: #fdf1ef;
+	--status-closed-text: #c0392b;
+	--status-closed-border: #f8c1b9;
+
+	--btn-primary-bg: #046241;
+	--btn-primary-text: #ffffff;
+	--btn-primary-hover: #004d32;
+	--btn-primary-border: #046241;
+
+	--btn-secondary-bg: #ffffff;
+	--btn-secondary-text: #046241;
+	--btn-secondary-hover: #edf5f0;
+	--btn-secondary-border: #046241;
+
+	--btn-pill-bg: #046241;
+	--btn-pill-text: #ffffff;
+	--btn-pill-hover: #004d32;
+	--btn-pill-border: #046241;
+
+	--radius-sm: 8px;
+	--radius-md: 18px;
+	--radius-lg: 24px;
+	--radius-xl: 32px;
+	--radius-pill: 9999px;
+
+	--card-shadow: 0 6px 20px rgba(4, 98, 65, 0.06);
+	--card-shadow-hover: 0 16px 36px rgba(4, 98, 65, 0.12);
+	--block-shadow: 0 12px 36px rgba(4, 98, 65, 0.06);
+	--btn-shadow: 0 4px 14px rgba(4, 98, 65, 0.2);
+
+	--navbar-bg: rgba(255, 255, 255, 0.94);
+	--navbar-border: 1px solid #e2ede5;
+	--footer-bg: #00291b;
+	--footer-text: #f0f6f2;
+	--footer-text-muted: #96b693;
+
+	--transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+	--transition-smooth: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Original Wireframe Theme (Preserved) */
+[data-theme='wireframe'] {
+	--font-sans:
+		'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		sans-serif;
+	--font-serif: 'Playfair Display', Georgia, serif;
+
+	--color-forest: #1f4f34;
+	--color-forest-hover: #163b27;
+	--color-forest-dark: #1a1e1b;
+	--color-forest-light: #eef5f0;
+	--color-sage: #8ba888;
+	--color-yellow: #f59e0b;
+
+	--bg-canvas: #f8faf8;
+	--bg-surface: #ffffff;
+	--bg-panel: #d8ded8;
+	--bg-panel-light: #eff2ef;
+	--bg-panel-hover: #cdd4cd;
+
+	--text-primary: #121814;
+	--text-secondary: #4a564e;
+	--text-tertiary: #718175;
+
+	--border-color: #1a1e1b;
+	--border-subtle: #d3dbd4;
+	--border-width: 2px;
+
+	--status-open-bg: #e6f6ec;
+	--status-open-text: #1d743a;
+	--status-open-border: #9dd8b0;
+
+	--status-closed-bg: #fdeeee;
+	--status-closed-text: #c0392b;
+	--status-closed-border: #f8b4ab;
+
+	--btn-primary-bg: #1a1e1b;
+	--btn-primary-text: #ffffff;
+	--btn-primary-hover: #1f4f34;
+	--btn-primary-border: #1a1e1b;
+
+	--btn-secondary-bg: #ffffff;
+	--btn-secondary-text: #1a1e1b;
+	--btn-secondary-hover: #f0f4ee;
+	--btn-secondary-border: #1a1e1b;
+
+	--btn-pill-bg: #d8ded8;
+	--btn-pill-text: #1a1e1b;
+	--btn-pill-hover: #cdd4cd;
+	--btn-pill-border: #1a1e1b;
+
+	--radius-sm: 8px;
+	--radius-md: 14px;
+	--radius-lg: 20px;
+	--radius-xl: 28px;
+	--radius-pill: 9999px;
+
+	--card-shadow: 4px 4px 0 var(--border-color);
+	--card-shadow-hover: 6px 6px 0 var(--border-color);
+	--block-shadow: 6px 6px 0 var(--border-color);
+	--btn-shadow: 3px 3px 0 var(--border-color);
+
+	--navbar-bg: #d8ded8;
+	--navbar-border: 2px solid #1a1e1b;
+	--footer-bg: #d8ded8;
+	--footer-text: #121814;
+	--footer-text-muted: #5a665c;
+
+	--transition-fast: 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+	--transition-smooth: 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+html {
+	font-family: var(--font-sans);
+	color: var(--text-primary);
+	background-color: var(--bg-canvas);
+	scroll-behavior: smooth;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+body {
+	min-height: 100vh;
+	line-height: 1.55;
+	overflow-x: hidden;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+}
+
+button {
+	font-family: inherit;
+	border: none;
+	background: none;
+	cursor: pointer;
+}
+
+img {
+	max-width: 100%;
+	display: block;
+}
