@@ -15,11 +15,11 @@
 		<!-- Section Header inside container -->
 		<div class="explore-header-box">
 			<div class="title-with-annotation">
-				<h2 class="explore-title">Explore the parks</h2>
+				<h2 class="explore-title">Explore our parks</h2>
 			</div>
 
 			<p class="explore-subhead">
-				Tērvete is a 1,200-hectare open nature reserve. Explore each park below to see its theme,
+				Tērvete dabas parks is a 1,200-hectare open nature reserve. Explore each park below to see its theme,
 				included activities, and premium activities.
 			</p>
 

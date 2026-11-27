@@ -50,10 +50,11 @@
 
 		<!-- Bottom interactive hint -->
 		<div class="card-hint-row">
-			<span class="hover-hint-pill">
+			<!--<span class="hover-hint-pill">
 				<span>View Activities</span>
 				<span class="hint-arrow">→</span>
 			</span>
+			-->
 		</div>
 
 		<!-- Mobile expand toggle button -->
@@ -85,10 +86,11 @@
 	<!-- Detail Overlay (Revealed on hover) -->
 	<div class="card-detail-overlay">
 		<div class="detail-header">
-			<div class="detail-top-meta">
+			<!--<div class="detail-top-meta">
 				<span class="archetype-pill">{park.archetype || 'Themed Zone'}</span>
 			</div>
-			<h4 class="detail-title">{park.name}</h4>
+			-->
+			<!--<h4 class="detail-title">{park.name}</h4>-->
 			<p class="detail-tagline">{park.tagline}</p>
 		</div>
 
@@ -102,7 +104,7 @@
 				<ul class="activities-list">
 					{#each park.includedActivities.slice(0, 4) as item (item)}
 						<li class="activity-item">
-							<span class="bullet-check">✓</span>
+							<span class="bullet-check">•</span>
 							<span class="activity-text">{item}</span>
 						</li>
 					{/each}
@@ -117,7 +119,7 @@
 				<ul class="activities-list">
 					{#each park.premiumActivities.slice(0, 3) as item (item)}
 						<li class="activity-item">
-							<span class="bullet-star">★</span>
+							<span class="bullet-star">•</span>
 							<span class="activity-text">{item}</span>
 						</li>
 					{/each}
@@ -126,13 +128,13 @@
 		</div>
 
 		<div class="detail-footer">
-			<span class="footer-note">Free roaming zone in Tērvete</span>
+			<!--<span class="footer-note">Free roaming zone in Tērvete</span>-->
 			<button
 				class="btn-detail-guide"
 				onclick={() => onSelectPark(park)}
 				title="View full park guide and all activities"
 			>
-				<span>Complete Guide</span>
+				<span>See more</span>
 				<span class="btn-arrow">→</span>
 			</button>
 		</div>
