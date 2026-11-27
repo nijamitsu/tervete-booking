@@ -25,10 +25,12 @@
 					<h3 class="getaway-title">{getaway.title}</h3>
 
 					<!-- Brief description box -->
+					<!--
 					<div class="brief-box">
 						<span class="brief-heading">Brief description of what this means:</span>
 						<p class="brief-text">{getaway.summary}</p>
 					</div>
+					-->
 
 					<!-- Included Features -->
 					<div class="getaway-features">
@@ -57,12 +59,14 @@
 					</div>
 
 					<!-- Price Row -->
+					<!--
 					<div class="getaway-price-row">
 						<div class="price-block">
 							<span class="price-amount">{getaway.price}</span>
 							<span class="price-unit">/{getaway.priceUnit}</span>
 						</div>
 					</div>
+					-->
 
 					<!-- Action Button -->
 					<div class="getaway-action-row">
@@ -71,7 +75,7 @@
 							onclick={() => onSelectGetaway(getaway)}
 							aria-label="Select {getaway.title}"
 						>
-							<span class="plus-icon">+</span>
+							<span class="plus-icon">See prices</span>
 							<span class="plus-label">{getaway.buttonLabel}</span>
 						</button>
 					</div>
@@ -80,6 +84,7 @@
 		</div>
 
 		<!-- "help me decide" Button -->
+		<!--
 		<div class="help-me-decide-box">
 			<button class="btn-help-me-decide" onclick={onHelpMeDecide}>
 				<span class="help-text">help me decide</span>
@@ -88,6 +93,7 @@
 				Not sure which option fits your group? Take our 1-minute personalized recommendation quiz!
 			</p>
 		</div>
+		-->
 	</div>
 </section>
 
@@ -192,7 +198,7 @@
 
 	.brief-box {
 		background: var(--bg-panel);
-		border: 1.5px dashed var(--border-color);
+		border: 1.5px solid var(--border-color);
 		border-radius: var(--radius-sm);
 		padding: 14px 16px;
 		margin-bottom: 22px;

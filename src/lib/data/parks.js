@@ -292,7 +292,7 @@ export const GETAWAYS_DATA = [
 		badge: 'Nature Pass',
 		subtitle: 'Full access to all 6 unenclosed park worlds',
 		summary:
-			'Tērvete is a single open nature reserve. Your general admission grants unlimited walking access to all 6 themed worlds and dozens of included activities. Premium workshops, boat rentals, and treetop ropes can be enjoyed on-site as desired.',
+			'Explore all 6 themed worlds and dozens of included activities across Tērvete’s open nature reserve with your general admission ticket. Add-ons like boat rentals, treetop ropes, and workshops are available on-site.',
 		price: 'From €7.00',
 		priceUnit: 'per visitor (Free under 7)',
 		features: [
