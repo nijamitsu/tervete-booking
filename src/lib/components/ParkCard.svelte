@@ -479,7 +479,7 @@
 		margin-bottom: auto;
 		display: flex;
 		align-items: center;
-		justify-content: space-between;
+		justify-content: flex-end;
 		gap: 8px;
 		padding-top: 10px;
 		border-top: 1px solid var(--border-subtle);

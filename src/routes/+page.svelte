@@ -57,65 +57,7 @@
 </script>
 
 <div class="landing-page-root" data-theme={theme} class:frame-layout={frameMode === 'framed'}>
-	<!-- Style & Theme Switcher Bar (Preserves original wireframe style & toggles LVM style) -->
-	<aside class="canvas-control-bar" aria-label="Style and layout switcher">
-		<div class="canvas-meta">
-			<div class="brand-tag-group">
-				<span class="active-style-pill">
-					{theme === 'lvm' ? '🌲 LVM Nature Style' : '📐 Wireframe Style'}
-				</span>
-				<span class="meta-desc">
-					{theme === 'lvm'
-						? 'Styled according to atputa.lvm.lv design system'
-						: 'Original wireframe layout preserved'}
-				</span>
-			</div>
-		</div>
-
-		<div class="controls-group">
-			<!-- Theme Switcher -->
-			<div class="theme-switcher-pill" title="Toggle between LVM and Wireframe styles">
-				<button
-					class="btn-switch-theme"
-					class:active={theme === 'lvm'}
-					onclick={() => {
-						theme = 'lvm';
-						if (frameMode === 'framed') frameMode = 'full';
-					}}
-				>
-					<span>🌲 LVM Official</span>
-				</button>
-				<button
-					class="btn-switch-theme"
-					class:active={theme === 'wireframe'}
-					onclick={() => {
-						theme = 'wireframe';
-						frameMode = 'framed';
-					}}
-				>
-					<span>📐 Wireframe</span>
-				</button>
-			</div>
-
-			<!-- Frame Mode Switcher -->
-			<div class="frame-switcher-pill" title="Toggle viewport frame">
-				<button
-					class="btn-toggle-frame"
-					class:active={frameMode === 'full'}
-					onclick={() => (frameMode = 'full')}
-				>
-					<span>Full</span>
-				</button>
-				<button
-					class="btn-toggle-frame"
-					class:active={frameMode === 'framed'}
-					onclick={() => (frameMode = 'framed')}
-				>
-					<span>Frame</span>
-				</button>
-			</div>
-		</div>
-	</aside>
+	
 
 	<!-- Main Single Page Canvas -->
 	<main class="page-canvas">
