@@ -30,12 +30,13 @@
 
 	<!-- Front / Standard View -->
 	<div class="card-standard-view">
+		<!--
 		<div class="card-badge-row">
-			<!--<span class="zone-badge">
+			<span class="zone-badge">
 				{park.worldId || 'Open Zone'}
 			</span>
-			-->
 		</div>
+		-->
 
 		<div class="card-image-wrapper">
 			<img src={park.image} alt={park.name} class="park-thumb" loading="lazy" />
@@ -49,13 +50,14 @@
 		</p>
 
 		<!-- Bottom interactive hint -->
+		<!--
 		<div class="card-hint-row">
-			<!--<span class="hover-hint-pill">
+			<span class="hover-hint-pill">
 				<span>View Activities</span>
 				<span class="hint-arrow">→</span>
 			</span>
-			-->
 		</div>
+		-->
 
 		<!-- Mobile expand toggle button -->
 		<button
@@ -90,7 +92,7 @@
 				<span class="archetype-pill">{park.archetype || 'Themed Zone'}</span>
 			</div>
 			-->
-			<!--<h4 class="detail-title">{park.name}</h4>-->
+			<h4 class="detail-title">{park.name}</h4>
 			<p class="detail-tagline">{park.tagline}</p>
 		</div>
 
@@ -179,14 +181,23 @@
 
 	/* Card Standard View */
 	.card-standard-view {
-		padding: 22px 20px 20px;
+		padding: 24px 20px;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		justify-content: center;
 		text-align: center;
-		height: 100%;
-		flex: 1;
-		transition: opacity 0.25s ease;
+		flex: 1 0 auto;
+		transition:
+			opacity 0.22s ease,
+			visibility 0.22s ease;
+	}
+
+	.park-card:hover .card-standard-view,
+	.park-card.is-expanded .card-standard-view {
+		opacity: 0;
+		visibility: hidden;
+		pointer-events: none;
 	}
 
 	.card-badge-row {
@@ -267,7 +278,7 @@
 		font-size: 0.86rem;
 		line-height: 1.45;
 		color: var(--text-secondary);
-		margin-bottom: 12px;
+		margin-bottom: 0;
 		text-align: center;
 	}
 
@@ -352,6 +363,7 @@
 	}
 
 	.detail-header {
+		margin-top: auto;
 		margin-bottom: 12px;
 		flex-shrink: 0;
 	}
@@ -372,10 +384,10 @@
 	}
 
 	.detail-title {
-		font-size: 1.15rem;
+		font-size: 1.25rem;
 		font-weight: 800;
 		color: var(--color-forest-dark);
-		line-height: 1.2;
+		line-height: 1.25;
 		margin-bottom: 3px;
 	}
 
@@ -392,7 +404,6 @@
 		flex-direction: column;
 		gap: 10px;
 		margin-bottom: 12px;
-		flex: 1;
 	}
 
 	.activity-group {
@@ -465,7 +476,7 @@
 	}
 
 	.detail-footer {
-		margin-top: auto;
+		margin-bottom: auto;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;

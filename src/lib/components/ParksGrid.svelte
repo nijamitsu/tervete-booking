@@ -19,8 +19,8 @@
 			</div>
 
 			<p class="explore-subhead">
-				Tērvete dabas parks is a 1,200-hectare open nature reserve. Explore each park below to see its theme,
-				included activities, and premium activities.
+				Tērvete dabas parks is a 1,200-hectare open nature reserve. Explore each park below to see
+				its theme, included activities, and premium activities.
 			</p>
 
 			<!-- Filter tabs -->

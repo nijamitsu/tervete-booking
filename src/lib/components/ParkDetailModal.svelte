@@ -19,14 +19,16 @@
 			<div class="dialog-header">
 				<div class="header-left">
 					<div class="header-meta-row">
+						<!--
 						<span class="modal-theme-pill">
 							<span class="theme-dot" style="background: var(--modal-theme-color);"></span>
 							<span>{park.theme?.name || 'Nature'} Theme</span>
 						</span>
 						<span class="zone-pill">{park.worldId} • {park.archetype}</span>
+						-->
 					</div>
 					<h3 class="park-title">{park.name}</h3>
-					<span class="original-title">{park.originalName}</span>
+					<!--<span class="original-title">{park.originalName}</span>-->
 				</div>
 				<button class="btn-close" onclick={onClose} aria-label="Close details">✕</button>
 			</div>
@@ -44,16 +46,16 @@
 
 				<!-- Theme Banner -->
 				<div class="theme-summary-card">
-					<span class="theme-card-eyebrow">Thematic Identity</span>
-					<p class="theme-card-sentence">"{park.themeSentence}"</p>
-					<span class="theme-card-audience">Target: {park.ageGroup}</span>
+					<!--<span class="theme-card-eyebrow">Thematic Identity</span>-->
+					<p class="theme-card-sentence">{park.themeSentence}</p>
+					<!--<span class="theme-card-audience">Target: {park.ageGroup}</span>-->
 				</div>
 
 				<!-- Experience Connector -->
 				{#if park.connector}
 					<div class="content-block connector-block">
 						<div class="connector-header">
-							<span class="connector-badge">Signature Experience</span>
+							<!--<span class="connector-badge">Signature Experience</span>-->
 							<h4 class="connector-title">{park.connector}</h4>
 						</div>
 						<p class="connector-desc">{park.connectorDescription}</p>
@@ -69,7 +71,7 @@
 					<div class="activities-grid">
 						{#each park.includedActivities as item (item)}
 							<div class="activity-card included-card">
-								<span class="check-icon">✓</span>
+								<span class="check-icon">•</span>
 								<span class="card-item-text">{item}</span>
 							</div>
 						{/each}
@@ -85,7 +87,7 @@
 					<div class="activities-grid">
 						{#each park.premiumActivities as item (item)}
 							<div class="activity-card premium-card">
-								<span class="star-icon">★</span>
+								<span class="star-icon">•</span>
 								<span class="card-item-text">{item}</span>
 							</div>
 						{/each}
@@ -101,6 +103,7 @@
 				{/if}
 
 				<!-- Practical Information Notice -->
+				<!--
 				<div class="park-nature-notice">
 					<div class="notice-icon">🌲</div>
 					<div class="notice-text">
@@ -113,6 +116,7 @@
 						</p>
 					</div>
 				</div>
+				-->
 			</div>
 
 			<!-- Dialog Footer -->

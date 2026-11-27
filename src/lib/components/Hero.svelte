@@ -22,9 +22,23 @@
 
 <style>
 	.hero-section {
-		padding: 72px 24px 60px;
+		min-height: clamp(340px, 46vh, 480px);
+		padding: 96px 24px 88px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		text-align: center;
-		background: radial-gradient(ellipse at 50% 0%, var(--bg-panel) 0%, var(--bg-canvas) 75%);
+		background-image:
+			linear-gradient(
+				180deg,
+				rgba(0, 41, 27, 0.54) 0%,
+				rgba(0, 41, 27, 0.62) 60%,
+				rgba(0, 41, 27, 0.72) 100%
+			),
+			url('/home-bg-image.jpg');
+		background-size: cover;
+		background-position: center 35%;
+		background-repeat: no-repeat;
 		position: relative;
 		transition: background var(--transition-smooth);
 	}
@@ -35,28 +49,32 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		position: relative;
+		z-index: 1;
 	}
 
 	.hero-title {
 		font-size: clamp(2.5rem, 6vw, 4.2rem);
 		font-weight: 800;
 		letter-spacing: -0.03em;
-		color: var(--color-forest-dark);
+		color: #ffffff;
 		line-height: 1.12;
 		margin-bottom: 16px;
+		text-shadow: 0 2px 18px rgba(0, 20, 12, 0.5);
 	}
 
 	.hero-title i {
 		font-style: italic;
 		font-weight: 400;
-		color: var(--color-forest);
+		color: #d7f3e3;
 	}
 
 	.hero-description {
 		font-size: clamp(1.1rem, 2.2vw, 1.35rem);
-		color: var(--text-secondary);
+		color: rgba(255, 255, 255, 0.92);
 		max-width: 640px;
 		line-height: 1.6;
 		font-weight: 400;
+		text-shadow: 0 1px 12px rgba(0, 20, 12, 0.45);
 	}
 </style>

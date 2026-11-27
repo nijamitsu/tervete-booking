@@ -65,7 +65,6 @@
 		<div class="nav-actions">
 			<button class="btn-book" onclick={() => onOpenBooking()}>
 				<span>Book Tickets</span>
-				
 			</button>
 
 			<!-- Mobile menu toggle -->
