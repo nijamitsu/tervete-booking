@@ -29,7 +29,7 @@
 	}
 </script>
 
-<section id="info" class="visitor-section">
+<section id="contact" class="visitor-section">
 	<div class="visitor-container">
 		<!-- Section Header -->
 		<div class="visitor-header">
@@ -41,8 +41,6 @@
 
 		<!-- Pricing & Schedule Grid -->
 		<div id="pricing" class="info-cards-grid">
-
-
 			<!-- Location & How to Get Here -->
 			<div class="info-card full-width">
 				<div class="card-icon-title">
@@ -101,7 +99,7 @@
 		</div>
 
 		<!-- Interactive FAQ Accordion -->
-		<div class="faq-container">
+		<div id="faq" class="faq-container">
 			<h3 class="faq-section-title">Frequently Asked Questions</h3>
 			<div class="accordion">
 				{#each FAQS as faq, i (faq.q)}
@@ -148,9 +146,9 @@
 				<ul class="col-links">
 					<li><a href="#hero">Homepage</a></li>
 					<li><a href="#parks">Destinations (6 Parks)</a></li>
-					<li><a href="#getaways">Getaway Packages</a></li>
-					<li><a href="#pricing">Tickets & Rates</a></li>
-					<li><a href="#info">Directions & Parking</a></li>
+					<li><a href="#getaways">Tickets & Getaways</a></li>
+					<li><a href="#contact">Contact & Directions</a></li>
+					<li><a href="#faq">FAQ</a></li>
 				</ul>
 			</div>
 
@@ -183,6 +181,7 @@
 
 <style>
 	.visitor-section {
+		scroll-margin-top: 88px;
 		padding-top: 56px;
 		background: var(--bg-canvas);
 		border-top: var(--border-width) solid var(--border-color);
@@ -410,6 +409,7 @@
 
 	/* FAQ Accordion */
 	.faq-container {
+		scroll-margin-top: 88px;
 		max-width: 820px;
 		margin: 0 auto;
 	}

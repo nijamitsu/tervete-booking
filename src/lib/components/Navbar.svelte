@@ -57,8 +57,8 @@
 		<nav class="nav-links">
 			<a href="#parks" class="nav-link">Parks</a>
 			<a href="#getaways" class="nav-link">Tickets</a>
-			<a href="#pricing" class="nav-link">Contact</a>
-			<a href="#info" class="nav-link">FAQ</a>
+			<a href="#contact" class="nav-link">Contact</a>
+			<a href="#faq" class="nav-link">FAQ</a>
 		</nav>
 
 		<!-- Right Action Buttons -->
@@ -106,10 +106,10 @@
 	<!-- Mobile dropdown -->
 	{#if mobileMenuOpen}
 		<div class="mobile-menu">
-			<a href="#parks" class="mobile-link" onclick={closeMenu}>Destinations</a>
-			<a href="#getaways" class="mobile-link" onclick={closeMenu}>Getaways & Stays</a>
-			<a href="#pricing" class="mobile-link" onclick={closeMenu}>Tickets & Pricing</a>
-			<a href="#info" class="mobile-link" onclick={closeMenu}>Visitor Guidelines</a>
+			<a href="#parks" class="mobile-link" onclick={closeMenu}>Parks</a>
+			<a href="#getaways" class="mobile-link" onclick={closeMenu}>Tickets</a>
+			<a href="#contact" class="mobile-link" onclick={closeMenu}>Contact</a>
+			<a href="#faq" class="mobile-link" onclick={closeMenu}>FAQ</a>
 			<button
 				class="btn-book-mobile"
 				onclick={() => {

@@ -1,14 +1,171 @@
 <script>
+	const DAY_PASSES = [
+		{
+			id: 'discovery',
+			name: 'Discovery Pass',
+			subtitle: 'Explore at your own pace.',
+			adultPrice: 7.0,
+			childPrice: 5.5,
+			features: [
+				{ symbol: '✓', text: 'Access to all six worlds' },
+				{ symbol: '✓', text: 'All included activities' },
+				{ symbol: '+', text: 'Premium activities sold separately' }
+			]
+		},
+		{
+			id: 'discovery-plus',
+			name: 'Discovery Plus',
+			subtitle: 'Add something special.',
+			badge: 'Popular',
+			adultPrice: 19.0,
+			childPrice: 15.0,
+			features: [
+				{ symbol: '✓', text: 'Access to all six worlds' },
+				{ symbol: '✓', text: 'All included activities' },
+				{ symbol: '✓', text: '3 premium activities of your choice' }
+			]
+		},
+		{
+			id: 'unlimited',
+			name: 'Unlimited Pass',
+			subtitle: 'Make the most of your day.',
+			adultPrice: 29.0,
+			childPrice: 22.0,
+			features: [
+				{ symbol: '✓', text: 'Access to all six worlds' },
+				{ symbol: '✓', text: 'All included activities' },
+				{ symbol: '✓', text: 'All eligible premium activities' }
+			]
+		}
+	];
+
+	const ACCOMMODATION_OPTIONS = [
+		{
+			id: 'tent',
+			name: 'Tent Sites',
+			subtitle: 'Bring your own tent to the lakeside campsite.',
+			pricePerNight: 13.0,
+			includesParkEntry: false,
+			maxGuests: null,
+			features: [
+				{ symbol: '✓', text: 'Landscaped lakeside tent pitch' },
+				{ symbol: '✓', text: 'Campfire, grill & picnic access' },
+				{ symbol: '✓', text: 'Shared shower & WC facilities' },
+				{ symbol: '+', text: 'Park admission added per guest' }
+			]
+		},
+		{
+			id: 'treehouse',
+			name: 'Treehouses',
+			subtitle: 'Heated pine-canopy cabin overlooking the lake.',
+			badge: 'Popular',
+			pricePerNight: 150.0,
+			includesParkEntry: true,
+			maxGuests: 4,
+			features: [
+				{ symbol: '✓', text: 'Sleeps up to 4 • private bath & kitchen' },
+				{ symbol: '✓', text: 'Tērvete park entry included for guests' },
+				{ symbol: '✓', text: '3 premium activities of your choice' },
+				{ symbol: '✓', text: 'Private terrace grill & heating' }
+			]
+		},
+		{
+			id: 'underground',
+			name: 'Underground Cabins',
+			subtitle: 'Cozy fairytale earth cabin on a single level.',
+			pricePerNight: 145.0,
+			includesParkEntry: true,
+			maxGuests: 4,
+			features: [
+				{ symbol: '✓', text: 'Sleeps up to 4 • wheelchair accessible' },
+				{ symbol: '✓', text: 'Tērvete park entry included for guests' },
+				{ symbol: '✓', text: '3 premium activities of your choice' },
+				{ symbol: '✓', text: 'Private bath, kitchen & terrace grill' }
+			]
+		}
+	];
+
+	const EXTRA_SERVICES = [
+		{
+			id: 'train',
+			title: 'Fairytale Train',
+			description: 'Move easily between worlds.',
+			priceLabel: '+€1.50/person per ride',
+			price: 1.5,
+			perGuest: true,
+			includeUnderSix: true,
+			includedInUnlimited: true
+		},
+		{
+			id: 'meals',
+			title: 'Food & Meal Plans',
+			description: 'Enjoy a meal during your adventure.',
+			priceLabel: '+€12/guest',
+			price: 12.0,
+			perGuest: true,
+			includedInUnlimited: false
+		},
+		{
+			id: 'equipment',
+			title: 'Equipment Rental',
+			description: 'Find everything you need to explore.',
+			priceLabel: '+€8/guest',
+			price: 8.0,
+			perGuest: true,
+			includedInUnlimited: false
+		},
+		{
+			id: 'picnic',
+			title: 'Picnic & BBQ Areas',
+			description: 'Enjoy your own space in nature.',
+			priceLabel: '+€15 / reservation',
+			price: 15.0,
+			perGuest: false,
+			includedInUnlimited: false
+		},
+		{
+			id: 'parking',
+			title: 'Parking',
+			description: 'Plan your arrival.',
+			priceLabel: '+€5 / vehicle',
+			price: 5.0,
+			perGuest: false,
+			includedInUnlimited: true
+		},
+		{
+			id: 'explorerKit',
+			title: 'Explorer Kits',
+			description: 'More ways to discover the park.',
+			priceLabel: '+€6 / kit',
+			price: 6.0,
+			perGuest: false,
+			includedInUnlimited: false
+		}
+	];
+
 	let { isOpen, initialPackageId = 'day-activities', onClose } = $props();
 
 	let packageType = $state(initialPackageId);
+	let selectedPassId = $state('discovery-plus');
+	let selectedPass = $derived(DAY_PASSES.find((p) => p.id === selectedPassId) ?? DAY_PASSES[0]);
+	let selectedAccommodationId = $state('treehouse');
+	let selectedAccommodation = $derived(
+		ACCOMMODATION_OPTIONS.find((a) => a.id === selectedAccommodationId) ?? ACCOMMODATION_OPTIONS[1]
+	);
 	let selectedDate = $state(getTodayIsoDate());
+	let checkInDate = $state(getTodayIsoDate());
+	let checkOutDate = $state(addDaysIso(getTodayIsoDate(), 1));
 	let adultsCount = $state(2);
 	let kidsCount = $state(1);
 	let underSixCount = $state(0);
-	let addNetPark = $state(false);
-	let addTrain = $state(false);
-	let glampingNights = $state(1);
+	let selectedExtras = $state({
+		train: false,
+		meals: false,
+		equipment: false,
+		picnic: false,
+		parking: false,
+		explorerKit: false
+	});
 
 	// Checkout state
 	let isConfirmed = $state(false);
@@ -22,31 +179,85 @@
 		}
 	});
 
+	$effect(() => {
+		if (checkInDate && (!checkOutDate || checkOutDate <= checkInDate)) {
+			checkOutDate = addDaysIso(checkInDate, 1);
+		}
+	});
+
 	function getTodayIsoDate() {
 		const today = new Date();
 		return today.toISOString().split('T')[0];
+	}
+
+	function addDaysIso(isoDate, days) {
+		const timestamp = Date.parse(`${isoDate}T00:00:00Z`) + days * 86400000;
+		return new Date(timestamp).toISOString().split('T')[0];
+	}
+
+	let stayNights = $derived.by(() => {
+		if (!checkInDate || !checkOutDate) return 1;
+		const inMs = Date.parse(`${checkInDate}T00:00:00Z`);
+		const outMs = Date.parse(`${checkOutDate}T00:00:00Z`);
+		return Math.max(1, Math.round((outMs - inMs) / 86400000));
+	});
+
+	let totalGuests = $derived(adultsCount + kidsCount + underSixCount);
+	let cabinMaxGuests = $derived(
+		packageType === 'stay-and-play' ? (selectedAccommodation.maxGuests ?? null) : null
+	);
+	let isAtCabinCapacity = $derived(cabinMaxGuests !== null && totalGuests >= cabinMaxGuests);
+
+	$effect(() => {
+		if (cabinMaxGuests !== null && adultsCount + kidsCount + underSixCount > cabinMaxGuests) {
+			let excess = adultsCount + kidsCount + underSixCount - cabinMaxGuests;
+			if (underSixCount > 0) {
+				const cut = Math.min(underSixCount, excess);
+				underSixCount -= cut;
+				excess -= cut;
+			}
+			if (excess > 0 && kidsCount > 0) {
+				const cut = Math.min(kidsCount, excess);
+				kidsCount -= cut;
+				excess -= cut;
+			}
+			if (excess > 0 && adultsCount > 1) {
+				adultsCount = Math.max(1, adultsCount - excess);
+			}
+		}
+	});
+
+	function isExtraIncluded(extra) {
+		return (
+			packageType === 'day-activities' &&
+			selectedPassId === 'unlimited' &&
+			extra.includedInUnlimited
+		);
 	}
 
 	// Dynamic calculation
 	let totalPrice = $derived.by(() => {
 		let total = 0;
 		if (packageType === 'day-activities') {
-			// Adult €7, Kids €5.50, Under 6 Free
-			total += adultsCount * 7.0;
-			total += kidsCount * 5.5;
-			if (addNetPark) {
-				total += (adultsCount + kidsCount) * 10.0;
-			}
-			if (addTrain) {
-				total += (adultsCount + kidsCount + underSixCount) * 1.5;
-			}
+			total += adultsCount * selectedPass.adultPrice;
+			total += kidsCount * selectedPass.childPrice;
 		} else {
-			// Stay & Play package: Glamping starts at €65/night + park entry included for up to 4
-			total += glampingNights * 65.0;
-			if (addNetPark) {
-				total += (adultsCount + kidsCount) * 8.0; // discounted for overnight guests
+			total += stayNights * selectedAccommodation.pricePerNight;
+			if (!selectedAccommodation.includesParkEntry) {
+				total += adultsCount * 7.0;
+				total += kidsCount * 5.5;
 			}
 		}
+
+		for (const extra of EXTRA_SERVICES) {
+			if (!isExtraIncluded(extra) && selectedExtras[extra.id]) {
+				const guestCount = extra.includeUnderSix
+					? adultsCount + kidsCount + underSixCount
+					: adultsCount + kidsCount;
+				total += extra.perGuest ? guestCount * extra.price : extra.price;
+			}
+		}
+
 		return total.toFixed(2);
 	});
 
@@ -64,6 +275,14 @@
 		guestName = '';
 		guestEmail = '';
 		guestPhone = '';
+		selectedExtras = {
+			train: false,
+			meals: false,
+			equipment: false,
+			picnic: false,
+			parking: false,
+			explorerKit: false
+		};
 		onClose();
 	}
 </script>
@@ -101,41 +320,186 @@
 							onclick={() => (packageType = 'stay-and-play')}
 						>
 							<div class="tab-text">
-								<strong>Activities & Accommodation</strong>
+								<strong>Park & Accommodation</strong>
 								<!--<span>Glamping escape from €65</span>-->
 							</div>
 						</button>
 					</div>
 
 					<form onsubmit={handleConfirmBooking} class="booking-form">
-						<!-- Date Picker -->
-						<div class="form-section">
-							<label for="visit-date" class="section-label">1. Choose Date of Visit</label>
-							<div class="date-picker-wrap">
-								<input
-									id="visit-date"
-									type="date"
-									min={getTodayIsoDate()}
-									bind:value={selectedDate}
-									class="input-date"
-								/>
-								<span class="date-badge">✓ Valid all day</span>
+						<!-- Choose Your Pass (General Park Admission) OR Choose Your Accommodation (Park & Accommodation) -->
+						{#if packageType === 'day-activities'}
+							<div class="form-section">
+								<span class="section-label">1. Choose Your Pass</span>
+								<div class="pass-grid" role="radiogroup" aria-label="Choose your day pass">
+									{#each DAY_PASSES as pass (pass.id)}
+										<button
+											type="button"
+											role="radio"
+											aria-checked={selectedPassId === pass.id}
+											class="pass-card"
+											class:active={selectedPassId === pass.id}
+											onclick={() => (selectedPassId = pass.id)}
+										>
+											<div class="pass-card-top">
+												<div class="pass-name-row">
+													<strong class="pass-name">{pass.name}</strong>
+													{#if pass.badge}
+														<span class="pass-badge">{pass.badge}</span>
+													{/if}
+												</div>
+												<span class="pass-subtitle">{pass.subtitle}</span>
+											</div>
+
+											<ul class="pass-features">
+												{#each pass.features as feature (feature.text)}
+													<li class="pass-feature-item">
+														<span
+															class="pass-feature-symbol"
+															class:is-plus={feature.symbol === '+'}
+														>
+															{feature.symbol}
+														</span>
+														<span>{feature.text}</span>
+													</li>
+												{/each}
+											</ul>
+
+											<span class="pass-select-btn">
+												{selectedPassId === pass.id ? '✓ Selected' : 'Select pass'}
+											</span>
+										</button>
+									{/each}
+								</div>
 							</div>
+						{:else}
+							<div class="form-section">
+								<span class="section-label">1. Choose Your Accommodation</span>
+								<div
+									class="pass-grid"
+									role="radiogroup"
+									aria-label="Choose your accommodation option"
+								>
+									{#each ACCOMMODATION_OPTIONS as acc (acc.id)}
+										<button
+											type="button"
+											role="radio"
+											aria-checked={selectedAccommodationId === acc.id}
+											class="pass-card"
+											class:active={selectedAccommodationId === acc.id}
+											onclick={() => (selectedAccommodationId = acc.id)}
+										>
+											<div class="pass-card-top">
+												<div class="pass-name-row">
+													<strong class="pass-name">{acc.name}</strong>
+													{#if acc.badge}
+														<span class="pass-badge">{acc.badge}</span>
+													{/if}
+												</div>
+												<span class="pass-subtitle">{acc.subtitle}</span>
+												<div class="pass-price-line">
+													<strong>€{acc.pricePerNight.toFixed(0)}</strong>
+													<span>/ night</span>
+												</div>
+											</div>
+
+											<ul class="pass-features">
+												{#each acc.features as feature (feature.text)}
+													<li class="pass-feature-item">
+														<span
+															class="pass-feature-symbol"
+															class:is-plus={feature.symbol === '+'}
+														>
+															{feature.symbol}
+														</span>
+														<span>{feature.text}</span>
+													</li>
+												{/each}
+											</ul>
+
+											<span class="pass-select-btn">
+												{selectedAccommodationId === acc.id ? '✓ Selected' : 'Select stay'}
+											</span>
+										</button>
+									{/each}
+								</div>
+							</div>
+						{/if}
+
+						<!-- Date Picker / Stay Date Range -->
+						<div class="form-section">
+							{#if packageType === 'day-activities'}
+								<label for="visit-date" class="section-label">2. Choose Date of Visit</label>
+								<div class="date-picker-wrap">
+									<input
+										id="visit-date"
+										type="date"
+										min={getTodayIsoDate()}
+										bind:value={selectedDate}
+										class="input-date"
+									/>
+									<span class="date-badge">✓ Valid all day</span>
+								</div>
+							{:else}
+								<span class="section-label">2. Choose Stay Dates</span>
+								<div class="date-range-wrap">
+									<div class="date-field">
+										<label for="check-in-date">Check-in</label>
+										<input
+											id="check-in-date"
+											type="date"
+											min={getTodayIsoDate()}
+											bind:value={checkInDate}
+											class="input-date"
+										/>
+									</div>
+									<div class="date-field">
+										<label for="check-out-date">Check-out</label>
+										<input
+											id="check-out-date"
+											type="date"
+											min={addDaysIso(checkInDate, 1)}
+											bind:value={checkOutDate}
+											class="input-date"
+										/>
+									</div>
+									<span class="date-badge">
+										✓ {stayNights}
+										{stayNights === 1 ? 'night' : 'nights'}
+									</span>
+								</div>
+							{/if}
 						</div>
 
 						<!-- Guests Counter -->
 						<div class="form-section">
-							<label class="section-label">2. Select Visitors</label>
+							<div class="section-header-row">
+								<span class="section-label">3. Select Visitors</span>
+								{#if cabinMaxGuests !== null}
+									<span class="capacity-pill" class:at-limit={isAtCabinCapacity}>
+										{totalGuests} / {cabinMaxGuests} guests
+									</span>
+								{/if}
+							</div>
 							<div class="counters-grid">
 								<div class="counter-card">
 									<div class="counter-label">
 										<strong>Adults</strong>
-										<span>{packageType === 'day-activities' ? '€7.00 each' : 'Included'}</span>
+										<span>
+											{#if packageType === 'day-activities'}
+												€{selectedPass.adultPrice.toFixed(2)} each
+											{:else if selectedAccommodation.includesParkEntry}
+												Park entry included
+											{:else}
+												€7.00 park entry each
+											{/if}
+										</span>
 									</div>
 									<div class="counter-ctrls">
 										<button
 											type="button"
 											class="btn-counter"
+											disabled={adultsCount <= 1}
 											onclick={() => adultsCount > 1 && adultsCount--}
 										>
 											−
@@ -144,7 +508,8 @@
 										<button
 											type="button"
 											class="btn-counter"
-											onclick={() => adultsCount < 10 && adultsCount++}
+											disabled={isAtCabinCapacity || adultsCount >= 10}
+											onclick={() => !isAtCabinCapacity && adultsCount < 10 && adultsCount++}
 										>
 											+
 										</button>
@@ -154,12 +519,21 @@
 								<div class="counter-card">
 									<div class="counter-label">
 										<strong>Children (7–17 yrs) / Students</strong>
-										<span>{packageType === 'day-activities' ? '€5.50 each' : 'Included'}</span>
+										<span>
+											{#if packageType === 'day-activities'}
+												€{selectedPass.childPrice.toFixed(2)} each
+											{:else if selectedAccommodation.includesParkEntry}
+												Park entry included
+											{:else}
+												€5.50 park entry each
+											{/if}
+										</span>
 									</div>
 									<div class="counter-ctrls">
 										<button
 											type="button"
 											class="btn-counter"
+											disabled={kidsCount <= 0}
 											onclick={() => kidsCount > 0 && kidsCount--}
 										>
 											−
@@ -168,7 +542,8 @@
 										<button
 											type="button"
 											class="btn-counter"
-											onclick={() => kidsCount < 10 && kidsCount++}
+											disabled={isAtCabinCapacity || kidsCount >= 10}
+											onclick={() => !isAtCabinCapacity && kidsCount < 10 && kidsCount++}
 										>
 											+
 										</button>
@@ -184,6 +559,7 @@
 										<button
 											type="button"
 											class="btn-counter"
+											disabled={underSixCount <= 0}
 											onclick={() => underSixCount > 0 && underSixCount--}
 										>
 											−
@@ -192,81 +568,56 @@
 										<button
 											type="button"
 											class="btn-counter"
-											onclick={() => underSixCount < 10 && underSixCount++}
+											disabled={isAtCabinCapacity || underSixCount >= 10}
+											onclick={() => !isAtCabinCapacity && underSixCount < 10 && underSixCount++}
 										>
 											+
 										</button>
 									</div>
 								</div>
 							</div>
+							{#if cabinMaxGuests !== null}
+								<p class="capacity-note">
+									{selectedAccommodation.name} sleep up to {cabinMaxGuests} guests total (including children).
+									For larger groups, please book an additional cabin separately.
+								</p>
+							{/if}
 						</div>
 
-						<!-- Glamping specific: Nights count -->
-						{#if packageType === 'stay-and-play'}
-							<div class="form-section">
-								<label class="section-label">3. Glamping Pod Duration</label>
-								<div class="glamping-selector">
-									<div class="glamping-info">
-										<strong>Lakeside Eco-Pod (Sleeps 4)</strong>
-										<span>Includes multi-day passes, boat rental & campfire wood</span>
-									</div>
-									<div class="counter-ctrls">
-										<button
-											type="button"
-											class="btn-counter"
-											onclick={() => glampingNights > 1 && glampingNights--}
-										>
-											−
-										</button>
-										<span class="counter-num">
-											{glampingNights}
-											{glampingNights === 1 ? 'night' : 'nights'}
-										</span>
-										<button
-											type="button"
-											class="btn-counter"
-											onclick={() => glampingNights < 14 && glampingNights++}
-										>
-											+
-										</button>
-									</div>
-								</div>
-							</div>
-						{/if}
-
-						<!-- Add-ons -->
+						<!-- Extra Services: Make your day even better -->
 						<div class="form-section">
-							<label class="section-label">
-								{packageType === 'stay-and-play' ? '4' : '3'}. Popular Add-ons
-							</label>
-							<div class="addons-list">
-								<label class="addon-option">
-									<input type="checkbox" bind:checked={addNetPark} />
-									<div class="addon-desc">
-										<strong>The Living Forest (55-min jump session)</strong>
-										<span>
-											{packageType === 'stay-and-play'
-												? '+€8/guest (lodging discount)'
-												: '+€10/guest'}
-										</span>
-									</div>
-								</label>
-
-								<label class="addon-option">
-									<input type="checkbox" bind:checked={addTrain} />
-									<div class="addon-desc">
-										<strong>Anna Brigadere Park Electric Train</strong>
-										<span>+€1.50 per passenger one-way</span>
-									</div>
-								</label>
+							<span class="section-label">4. Make Your Day Even Better</span>
+							<p class="section-subhead">
+								Add a little comfort, convenience or adventure to your visit.
+							</p>
+							<div class="addons-grid">
+								{#each EXTRA_SERVICES as extra (extra.id)}
+									{@const included = isExtraIncluded(extra)}
+									<label class="addon-option" class:selected={included || selectedExtras[extra.id]}>
+										{#if included}
+											<span class="addon-included-check" aria-hidden="true">✓</span>
+										{:else}
+											<input type="checkbox" bind:checked={selectedExtras[extra.id]} />
+										{/if}
+										<div class="addon-desc">
+											<div class="addon-title-row">
+												<strong>{extra.title}</strong>
+												{#if included}
+													<span class="addon-included-pill">Included in Unlimited</span>
+												{:else}
+													<span class="addon-price">{extra.priceLabel}</span>
+												{/if}
+											</div>
+											<p class="addon-sub">{extra.description}</p>
+										</div>
+									</label>
+								{/each}
 							</div>
 						</div>
 
 						<!-- Contact Details -->
 						<div class="form-section">
-							<label class="section-label">
-								{packageType === 'stay-and-play' ? '5' : '4'}. Guest Information
-							</label>
+							<label class="section-label">5. Guest Information</label>
 							<div class="inputs-grid">
 								<div class="input-field">
 									<label for="guest-name">Full Name *</label>
@@ -344,13 +695,17 @@
 							<span>Package:</span>
 							<strong>
 								{packageType === 'day-activities'
-									? 'Only park Activities'
-									: 'Park Activities & Accommodation'}
+									? `General Park Admission — ${selectedPass.name}`
+									: `Park & Accommodation — ${selectedAccommodation.name}`}
 							</strong>
 						</div>
 						<div class="summary-line">
-							<span>Date of Visit:</span>
-							<strong>{selectedDate}</strong>
+							<span>{packageType === 'day-activities' ? 'Date of Visit:' : 'Stay Dates:'}</span>
+							<strong>
+								{packageType === 'day-activities'
+									? selectedDate
+									: `${checkInDate} → ${checkOutDate} (${stayNights} ${stayNights === 1 ? 'night' : 'nights'})`}
+							</strong>
 						</div>
 						<div class="summary-line">
 							<span>Visitors:</span>
@@ -358,8 +713,10 @@
 						</div>
 						{#if packageType === 'stay-and-play'}
 							<div class="summary-line">
-								<span>Glamping Stay:</span>
-								<strong>{glampingNights} Night(s) Lakeside Pod</strong>
+								<span>Accommodation:</span>
+								<strong>
+									{selectedAccommodation.name} (€{selectedAccommodation.pricePerNight}/night)
+								</strong>
 							</div>
 						{/if}
 						<div class="summary-line total-highlight">
@@ -401,7 +758,7 @@
 		border: var(--border-width) solid var(--border-color);
 		border-radius: var(--radius-lg);
 		width: 100%;
-		max-width: 720px;
+		max-width: 820px;
 		max-height: 92vh;
 		overflow-y: auto;
 		box-shadow: var(--block-shadow);
@@ -506,6 +863,156 @@
 		color: var(--text-secondary);
 	}
 
+	/* Choose Your Pass Grid */
+	.pass-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 12px;
+	}
+
+	@media (max-width: 680px) {
+		.pass-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.pass-card {
+		display: flex;
+		flex-direction: column;
+		text-align: left;
+		padding: 16px 14px;
+		background: var(--bg-panel-light);
+		border: var(--border-width) solid var(--border-subtle);
+		border-radius: var(--radius-md);
+		cursor: pointer;
+		transition: all var(--transition-fast);
+	}
+
+	.pass-card:hover {
+		background: var(--bg-surface);
+		border-color: var(--color-forest);
+		transform: translateY(-2px);
+	}
+
+	.pass-card.active {
+		background: var(--bg-surface);
+		border-color: var(--color-forest);
+		box-shadow:
+			0 0 0 1px var(--color-forest),
+			var(--card-shadow);
+	}
+
+	.pass-card-top {
+		display: flex;
+		flex-direction: column;
+		gap: 4px;
+		margin-bottom: 12px;
+	}
+
+	.pass-name-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 6px;
+	}
+
+	.pass-name {
+		font-size: 0.96rem;
+		font-weight: 800;
+		color: var(--color-forest-dark);
+		line-height: 1.25;
+	}
+
+	.pass-badge {
+		font-size: 0.68rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+		padding: 2px 7px;
+		border-radius: var(--radius-pill);
+		background: var(--status-open-bg);
+		color: var(--status-open-text);
+		border: 1px solid var(--status-open-border);
+		flex-shrink: 0;
+	}
+
+	.pass-subtitle {
+		font-size: 0.78rem;
+		color: var(--text-secondary);
+		line-height: 1.35;
+	}
+
+	.pass-price-line {
+		display: flex;
+		align-items: baseline;
+		gap: 4px;
+		margin-top: 6px;
+		padding-top: 8px;
+		border-top: 1px solid var(--border-subtle);
+	}
+
+	.pass-price-line strong {
+		font-size: 1.2rem;
+		font-weight: 800;
+		color: var(--color-forest-dark);
+	}
+
+	.pass-price-line span {
+		font-size: 0.74rem;
+		font-weight: 600;
+		color: var(--text-tertiary);
+	}
+
+	.pass-features {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 14px;
+		display: flex;
+		flex-direction: column;
+		gap: 6px;
+	}
+
+	.pass-feature-item {
+		display: flex;
+		align-items: flex-start;
+		gap: 6px;
+		font-size: 0.76rem;
+		line-height: 1.35;
+		color: var(--text-primary);
+		font-weight: 500;
+	}
+
+	.pass-feature-symbol {
+		font-weight: 800;
+		color: var(--color-forest);
+		flex-shrink: 0;
+	}
+
+	.pass-feature-symbol.is-plus {
+		color: var(--text-tertiary);
+	}
+
+	.pass-select-btn {
+		margin-top: auto;
+		display: block;
+		width: 100%;
+		text-align: center;
+		padding: 8px 12px;
+		font-size: 0.8rem;
+		font-weight: 700;
+		border-radius: var(--radius-pill);
+		border: var(--border-width) solid var(--border-color);
+		background: var(--bg-surface);
+		color: var(--color-forest-dark);
+		transition: all var(--transition-fast);
+	}
+
+	.pass-card.active .pass-select-btn {
+		background: var(--btn-primary-bg);
+		color: var(--btn-primary-text);
+		border-color: var(--btn-primary-border);
+	}
+
 	.form-section {
 		margin-bottom: 22px;
 	}
@@ -520,10 +1027,74 @@
 		margin-bottom: 10px;
 	}
 
+	.section-header-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 10px;
+		margin-bottom: 10px;
+	}
+
+	.section-header-row .section-label {
+		margin-bottom: 0;
+	}
+
+	.capacity-pill {
+		font-size: 0.74rem;
+		font-weight: 800;
+		padding: 3px 10px;
+		border-radius: var(--radius-pill);
+		background: var(--bg-panel-light);
+		color: var(--color-forest);
+		border: 1px solid var(--border-color);
+	}
+
+	.capacity-pill.at-limit {
+		background: #fffbeb;
+		color: #b45309;
+		border-color: #fde68a;
+	}
+
+	.capacity-note {
+		font-size: 0.76rem;
+		color: var(--text-tertiary);
+		margin-top: 8px;
+		line-height: 1.4;
+	}
+
+	.section-subhead {
+		font-size: 0.82rem;
+		color: var(--text-secondary);
+		margin: -4px 0 12px;
+	}
+
 	.date-picker-wrap {
 		display: flex;
 		align-items: center;
 		gap: 12px;
+	}
+
+	.date-range-wrap {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-end;
+		gap: 12px;
+	}
+
+	.date-field {
+		display: flex;
+		flex-direction: column;
+		gap: 5px;
+	}
+
+	.date-field label {
+		font-size: 0.76rem;
+		font-weight: 700;
+		color: var(--text-secondary);
+	}
+
+	.date-range-wrap .date-badge {
+		margin-bottom: 8px;
 	}
 
 	.input-date {
@@ -606,8 +1177,14 @@
 		transition: background var(--transition-fast);
 	}
 
-	.btn-counter:hover {
+	.btn-counter:hover:not(:disabled) {
 		background: var(--bg-panel);
+	}
+
+	.btn-counter:disabled {
+		opacity: 0.38;
+		cursor: not-allowed;
+		box-shadow: none;
 	}
 
 	.counter-num {
@@ -643,32 +1220,76 @@
 		color: var(--text-secondary);
 	}
 
-	.addons-list {
-		display: flex;
-		flex-direction: column;
-		gap: 8px;
+	.addons-grid {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		gap: 10px;
+	}
+
+	@media (max-width: 600px) {
+		.addons-grid {
+			grid-template-columns: 1fr;
+		}
 	}
 
 	.addon-option {
 		display: flex;
-		align-items: center;
+		align-items: flex-start;
 		gap: 12px;
 		padding: 12px 14px;
 		background: var(--bg-surface);
 		border: var(--border-width) solid var(--border-subtle);
 		border-radius: var(--radius-md);
 		cursor: pointer;
+		transition: all var(--transition-fast);
+	}
+
+	.addon-option:hover {
+		border-color: var(--border-color);
+		background: var(--bg-panel-light);
+	}
+
+	.addon-option.selected {
+		border-color: var(--color-forest);
+		background: var(--color-forest-light);
 	}
 
 	.addon-option input[type='checkbox'] {
 		width: 18px;
 		height: 18px;
+		margin-top: 2px;
 		accent-color: var(--color-forest);
+	}
+
+	.addon-included-check {
+		width: 18px;
+		height: 18px;
+		margin-top: 2px;
+		border-radius: 4px;
+		background: var(--status-open-bg);
+		color: var(--status-open-text);
+		border: 1px solid var(--status-open-border);
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		font-size: 0.75rem;
+		font-weight: 800;
+		flex-shrink: 0;
 	}
 
 	.addon-desc {
 		display: flex;
 		flex-direction: column;
+		flex: 1;
+		gap: 3px;
+	}
+
+	.addon-title-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 8px;
+		flex-wrap: wrap;
 	}
 
 	.addon-desc strong {
@@ -676,10 +1297,27 @@
 		color: var(--text-primary);
 	}
 
-	.addon-desc span {
-		font-size: 0.78rem;
+	.addon-price {
+		font-size: 0.74rem;
+		font-weight: 700;
 		color: var(--color-forest);
-		font-weight: 600;
+	}
+
+	.addon-included-pill {
+		font-size: 0.68rem;
+		font-weight: 800;
+		padding: 2px 7px;
+		border-radius: var(--radius-pill);
+		background: var(--status-open-bg);
+		color: var(--status-open-text);
+		border: 1px solid var(--status-open-border);
+	}
+
+	.addon-sub {
+		font-size: 0.76rem;
+		color: var(--text-secondary);
+		line-height: 1.35;
+		margin: 0;
 	}
 
 	.inputs-grid {

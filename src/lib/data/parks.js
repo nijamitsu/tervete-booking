@@ -29,7 +29,7 @@ export const PARKS_DATA = [
 			'Explore Pinecone Town - Čiekure',
 			'Dwarf Village & Cottages Walkthrough',
 			'Giant’s View Observation Tower',
-			'Annele’s Zoo (Themed Dwarfs’ Farm)',
+			"Dwarfs' Zoo (Themed Dwarfs’ Farm)",
 			'Dwarf Gathering Place & Play Area',
 			'Hide and Seek in Tiny Houses',
 			'Self-guided Passport Challenges',
@@ -316,3 +316,165 @@ export const GETAWAYS_DATA = [
 		ctaNote: 'Check-in 15:00 • Check-out 12:00'
 	}
 ];
+
+export const ACTIVITY_DESCRIPTIONS = {
+	// The Dwarf Village
+	'Explore Pinecone Town - Čiekure':
+		'Wander through a whimsical miniature wooden town complete with tiny streets, workshops, and pine-cone roofs.',
+	'Dwarf Village & Cottages Walkthrough':
+		'Step up to handcrafted dwarf cottages and peek inside their cozy rooms, tools, and miniature furniture.',
+	'Giant’s View Observation Tower':
+		'Climb up for a giant’s-eye panorama over the miniature village and surrounding ancient pine canopy.',
+	"Dwarfs' Zoo (Themed Dwarfs’ Farm)":
+		'Meet friendly farm animals in a charming dwarf-scale barnyard designed for young visitors.',
+	'Dwarf Gathering Place & Play Area':
+		'A lively central clearing where kids climb, play, and join seasonal village festivities.',
+	'Hide and Seek in Tiny Houses':
+		'Explore winding paths and child-sized wooden nooks made for playful games of hide and seek.',
+	'Self-guided Passport Challenges':
+		'Follow clues around the village at your own pace to collect stamps and complete playful missions.',
+	'Morning March & Village Singalong':
+		'Join costumed village hosts for cheerful songs and a festive morning stroll through the pines.',
+	'Become a Dwarf for a Day':
+		'Dress up, receive your dwarf name, and take part in a guided day of village chores and games.',
+	'Carve a Wooden Toy Workshop':
+		'Learn simple traditional woodworking techniques with a craftsman to shape your own wooden keepsake.',
+	'Build Your Own Dwarf House':
+		'Design and assemble a miniature timber cottage using natural forest materials to take home.',
+	'Dwarf Blacksmith Workshop':
+		'Watch sparks fly and try hands-on traditional forging alongside a skilled village smith.',
+	'Make Your Own Dwarf Cap':
+		'Craft and decorate a colorful felt dwarf hat to wear throughout your park adventure.',
+	'Dwarf Cooking & Pancake Workshop':
+		'Mix, cook, and taste freshly made forest pancakes over a warm village hearth.',
+	'Build a Birdhouse Workshop':
+		'Hammer together a sturdy wooden nesting box while learning about Tērvete’s woodland birds.',
+
+	// Anna Brigadere Park
+	'Forest Mother’s Kingdom Trail':
+		'Stroll mossy pine paths dotted with wooden sculptures honoring the gentle guardian of the forest.',
+	'Forest King’s Realm & Witch’s Grove':
+		'Visit the wooden throne of the Forest King and meet the mischievous Witch in her crooked pine grove.',
+	'Sprīdītis’ Story Trail & Clues':
+		'Follow interactive chapter markers tracing young Sprīdītis on his classic Latvian quest for happiness.',
+	'Miser’s Cottage & Annele’s Friends':
+		'Discover beloved storybook huts and carved characters from Anna Brigadere’s childhood tales.',
+	'Bridge of the Landlady':
+		'Cross a picturesque carved wooden bridge linking key chapters of the fairytale trail.',
+	'Fairytale Maze & Wooden Playground':
+		'Navigate a playful timber labyrinth and climb storybook-inspired wooden play structures.',
+	'Sprīdītis Treasure Hunt':
+		'Search hidden trail signs and solve riddles to uncover the secret treasure of the Enchanted Forest.',
+	'Live Flute Performances (selected times)':
+		'Enjoy live folk flute melodies drifting through the pines during scheduled daytime sessions.',
+	'Sprīdītis’ Interactive Adventure Quest':
+		'Team up with live actors to solve theatrical challenges and become the hero of the story.',
+	'Live Interactive Fairytale Theatre':
+		'Watch—and step into—lively open-air performances bringing classic Latvian folktales to life.',
+	'Maija & Paija’s Theatrical Quest':
+		'Join an interactive guided tale inspired by the classic story of kindness, courage, and woodland magic.',
+	'Forest Mother’s Nature Workshop':
+		'Create seasonal wreaths, charms, or herbal crafts guided by the Forest Mother’s storytellers.',
+	'Create Your Own Fairytale Workshop':
+		'Invent characters, plot twists, and illustrated mini-books in a hands-on family storytelling session.',
+	'Fairytale Costume Workshop':
+		'Design crowns, capes, and magical props so kids can step straight into their favorite fairytale role.',
+	'Enchanted Forest Night Walk':
+		'Experience the sculpture trails by lantern light with atmospheric evening tales after regular hours.',
+
+	// The Adventure Heights
+	'Skills Bike Park & Obstacle Loops':
+		'Practice balance, turns, and rollers on wooden berms and beginner-friendly forest bike features.',
+	'Off-road Forest Cycling (own equipment)':
+		'Ride scenic pine-needle singletracks and undulating woodland loops on your own mountain bike.',
+	'BMX & Bike Skills Challenges':
+		'Test your agility on pump tracks, ramps, and progressive skill lines suited to riders of all levels.',
+	'Adventure Ground Playground':
+		'Low-level climbing nets, balance beams, and swings built for younger adventurers close to the ground.',
+	'Outdoor Fitness & Strength Challenges':
+		'Try natural timber workout stations and forest obstacle elements designed for active movement.',
+	'Self-guided Team Challenge Circuits':
+		'Tackle cooperative physical puzzles and friendly timed challenges together with family or friends.',
+	'Adventure Achievement Trail':
+		'Follow marked difficulty zones from basecamp and track your milestones as you level up.',
+	'Tarzāns Treetop High-Rope Course':
+		'Climb, swing, and traverse suspended wooden bridges across 9 difficulty-graded courses up to 10 meters high.',
+	'Sky Bike Canopy High-Wire Ride':
+		'Pedal a specially rigged bicycle along a taut aerial cable suspended high between pine treetops.',
+	'Zip Line & Climbing Wall Challenges':
+		'Scale vertical forest climbing walls and soar across clearings on fast canopy zip lines.',
+	'Tērvete Net Park Canopy Jump Session':
+		'Bounce, climb, and play in a fully enclosed 4-meter-high aerial net labyrinth and treetop treehouse.',
+	'Tērvete Butterfly House Exploration':
+		'Step inside a warm tropical greenhouse where hundreds of vibrant exotic butterflies flutter freely around you.',
+	'Guided Mountain Bike Forest Adventure':
+		'Explore Tērvete’s best backcountry trails with a local guide sharing technique tips and scenic stops.',
+	'Facilitated Team-Building Quests':
+		'Instructor-led group challenges combining high-ropes, strategy, and teamwork for groups and schools.',
+
+	// The Living Forest
+	'Scenic Forest Hiking & Walking Trails':
+		'Follow peaceful marked routes winding beneath towering 300-year-old pines and mossy glades.',
+	'Self-guided Nature Discovery Trail':
+		'Explore hands-on outdoor stations that turn a forest walk into an interactive ecology quest.',
+	'Educational Botanical & Forest Displays':
+		'Learn how northern pine ecosystems grow, renew, and sustain biodiversity across every season.',
+	'Animal Footprint Discovery Stations':
+		'Compare life-size woodland tracks and learn how to spot signs of deer, foxes, and forest birds.',
+	'Plant & Ancient Tree Identification':
+		'Inspect tree cross-sections, bark textures, and native woodland flora with clear field guides.',
+	'Wildlife Spotting & Bird Observation':
+		'Pause at quiet viewing clearings to listen for woodpeckers, owls, and seasonal forest wildlife.',
+	'Pine Cone & Natural Material Collecting':
+		'Gather fallen pine cones, moss, and twigs along the trail for nature observation and creative play.',
+	'Guided Forest Ranger Exploration':
+		'Walk with an LVM forest ranger to uncover hidden ecology stories, forestry wisdom, and wildlife habitats.',
+	'Forest Survival Skills Workshop':
+		'Learn practical outdoor essentials like shelter building, knots, orientation, and safe campfire skills.',
+	'Nature Journaling & Natural Dye Craft':
+		'Sketch botanical finds and experiment with pigments extracted from berries, bark, and forest leaves.',
+	'Guided Wildlife & Birdwatching Tour':
+		'Join a naturalist with binoculars to track woodland birdlife and learn their seasonal calls.',
+	'Mushroom & Berry Foraging Tour':
+		'Discover edible wild berries and mushrooms with an expert guide teaching safe, sustainable foraging.',
+	'Forest Photography Masterclass':
+		'Capture shafts of pine light, macro textures, and wildlife with hands-on tips from a nature photographer.',
+	'Junior Forest Ranger Experience':
+		'A fun field expedition where kids use lenses, compasses, and checklists to earn their junior ranger badge.',
+
+	// The Riverside Chill
+	'Scenic Walking Trails & Wooden Boardwalks':
+		'Stroll effortlessly along smooth timber boardwalks and shaded riverside paths at your own unhurried pace.',
+	'Forest Viewpoints & Landscape Framing Stations':
+		'Pause at curated wooden decks and scenic frames overlooking calm river bends and tall pines.',
+
+	// The Lakeside Haven
+	'Lakeside Walking & Promenade Trail':
+		'Take a breezy waterside walk along the 220-hectare reservoir shoreline with open views across the water.',
+	'Birdwatching Observation Tower':
+		'Climb the lakeside tower for sweeping panoramic views of waterfowl, reeds, and golden-hour sunsets.',
+	'Public Picnic Areas & Scenic Shorelines':
+		'Spread out a blanket or gather at timber picnic tables right beside the water’s edge.',
+	'Sandy Beach Swimming & Water Play':
+		'Cool off on a gentle sandy shore ideal for summer dips, wading, and relaxed family beach time.',
+	'Self-guided Shoreline Birdwatching':
+		'Spot swans, herons, and migratory lake birds from quiet wooden piers and viewing decks.',
+	'Outdoor Social Games & Lawn Games':
+		'Unwind with casual lakeside lawn games and open grassy spaces made for families and groups.',
+	'Open Campfire & Sunset Gathering Areas':
+		'Gather around designated lakeside fire circles to warm up, chat, and watch the evening sky.',
+	'Boat Riding, Rowboats & Water Bicycles':
+		'Rent a classic wooden rowboat or pedal boat to drift across the calm pine-fringed reservoir.',
+	'Stand-Up Paddleboarding (SUP) Rentals':
+		'Glide quietly over mirror-like morning or sunset waters on stable, beginner-friendly SUP boards.',
+	'Licensed Lake Fishing & Angling Lessons':
+		'Cast from wooden piers for pike and tench, with optional beginner coaching and gear guidance.',
+	'Guided Sunset Boat Tour on the Lake':
+		'Enjoy a relaxed evening cruise across the reservoir with local stories as the sun dips below the pines.',
+	'Outdoor Campfire Cooking Workshop':
+		'Prepare hearty seasonal dishes over an open flame in a guided lakeside culinary session.',
+	'Lakeside Yoga & Wellness Sessions':
+		'Stretch, breathe, and restore balance on wooden lakeside decks surrounded by water and pine air.',
+	'Outdoor Cinema Nights & Acoustic Concerts':
+		'Experience magical summer evenings under the stars with open-air film screenings and live acoustic music.'
+};

@@ -1,5 +1,14 @@
 <script>
+	import { ACTIVITY_DESCRIPTIONS } from '#lib/data/parks.js';
+
 	let { park, isOpen, onClose } = $props();
+	let activeTooltip = $state(null);
+
+	$effect(() => {
+		if (!isOpen || !park?.id) {
+			activeTooltip = null;
+		}
+	});
 </script>
 
 {#if isOpen && park}
@@ -70,10 +79,24 @@
 					</div>
 					<div class="activities-grid">
 						{#each park.includedActivities as item (item)}
-							<div class="activity-card included-card">
+							{@const description = ACTIVITY_DESCRIPTIONS[item]}
+							<button
+								type="button"
+								class="activity-card included-card"
+								class:has-tooltip={Boolean(description)}
+								class:tooltip-open={activeTooltip === item}
+								onclick={() => (activeTooltip = activeTooltip === item ? null : item)}
+								onmouseleave={() => {
+									if (activeTooltip === item) activeTooltip = null;
+								}}
+							>
 								<span class="check-icon">•</span>
 								<span class="card-item-text">{item}</span>
-							</div>
+								{#if description}
+									<span class="info-hint" aria-hidden="true">i</span>
+									<span class="activity-tooltip" role="tooltip">{description}</span>
+								{/if}
+							</button>
 						{/each}
 					</div>
 				</div>
@@ -87,10 +110,24 @@
 						</div>
 						<div class="activities-grid">
 							{#each park.premiumActivities as item (item)}
-								<div class="activity-card premium-card">
+								{@const description = ACTIVITY_DESCRIPTIONS[item]}
+								<button
+									type="button"
+									class="activity-card premium-card"
+									class:has-tooltip={Boolean(description)}
+									class:tooltip-open={activeTooltip === item}
+									onclick={() => (activeTooltip = activeTooltip === item ? null : item)}
+									onmouseleave={() => {
+										if (activeTooltip === item) activeTooltip = null;
+									}}
+								>
 									<span class="star-icon">•</span>
 									<span class="card-item-text">{item}</span>
-								</div>
+									{#if description}
+										<span class="info-hint" aria-hidden="true">i</span>
+										<span class="activity-tooltip" role="tooltip">{description}</span>
+									{/if}
+								</button>
 							{/each}
 						</div>
 					</div>
@@ -105,12 +142,13 @@
 				{/if}
 
 				<!-- Wayfinding & Visual Identity -->
-				{#if park.visualCues}
+				<!--{#if park.visualCues}
 					<div class="content-block cues-block">
 						<h4 class="block-title">Visual Cues & Wayfinding</h4>
 						<p class="cues-text">{park.visualCues}</p>
 					</div>
 				{/if}
+				-->
 
 				<!-- Practical Information Notice -->
 				<!--
@@ -399,6 +437,9 @@
 	}
 
 	.activity-card {
+		position: relative;
+		width: 100%;
+		text-align: left;
 		display: flex;
 		align-items: flex-start;
 		gap: 8px;
@@ -406,6 +447,20 @@
 		border-radius: var(--radius-sm);
 		font-size: 0.82rem;
 		font-weight: 600;
+		cursor: pointer;
+		transition:
+			border-color var(--transition-fast),
+			box-shadow var(--transition-fast),
+			transform var(--transition-fast);
+	}
+
+	.activity-card:hover,
+	.activity-card:focus-visible,
+	.activity-card.tooltip-open {
+		z-index: 30;
+		border-color: var(--modal-theme-color);
+		box-shadow: 0 4px 12px rgba(0, 41, 27, 0.08);
+		outline: none;
 	}
 
 	.included-card {
@@ -433,6 +488,103 @@
 	.card-item-text {
 		color: var(--text-primary);
 		line-height: 1.35;
+	}
+
+	.info-hint {
+		margin-left: auto;
+		margin-top: 1px;
+		flex-shrink: 0;
+		width: 17px;
+		height: 17px;
+		border-radius: 50%;
+		border: 1px solid var(--border-color);
+		background: var(--bg-surface);
+		color: var(--text-tertiary);
+		font-size: 0.68rem;
+		font-weight: 800;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		transition:
+			color var(--transition-fast),
+			border-color var(--transition-fast);
+	}
+
+	.activity-card:hover .info-hint,
+	.activity-card:focus-visible .info-hint,
+	.activity-card.tooltip-open .info-hint {
+		color: var(--modal-theme-color);
+		border-color: var(--modal-theme-color);
+	}
+
+	.activity-tooltip {
+		position: absolute;
+		bottom: calc(100% + 9px);
+		left: 0;
+		width: max(100%, 240px);
+		max-width: 300px;
+		padding: 10px 12px;
+		border-radius: var(--radius-sm);
+		background: #00291b;
+		color: #f6faf7;
+		font-size: 0.78rem;
+		font-weight: 500;
+		line-height: 1.45;
+		box-shadow: 0 12px 28px rgba(0, 20, 12, 0.28);
+		border: 1px solid rgba(255, 255, 255, 0.14);
+		opacity: 0;
+		visibility: hidden;
+		transform: translateY(4px);
+		pointer-events: none;
+		transition:
+			opacity 0.16s ease,
+			transform 0.16s ease,
+			visibility 0.16s ease;
+		z-index: 40;
+	}
+
+	.activity-tooltip::after {
+		content: '';
+		position: absolute;
+		bottom: -5px;
+		left: 18px;
+		width: 9px;
+		height: 9px;
+		background: #00291b;
+		transform: rotate(45deg);
+	}
+
+	.activity-card:nth-child(2n) .activity-tooltip {
+		left: auto;
+		right: 0;
+	}
+
+	.activity-card:nth-child(2n) .activity-tooltip::after {
+		left: auto;
+		right: 18px;
+	}
+
+	@media (max-width: 580px) {
+		.activity-tooltip,
+		.activity-card:nth-child(2n) .activity-tooltip {
+			left: 0;
+			right: 0;
+			width: 100%;
+			max-width: none;
+		}
+
+		.activity-card:nth-child(2n) .activity-tooltip::after {
+			left: 18px;
+			right: auto;
+		}
+	}
+
+	.activity-card:hover .activity-tooltip,
+	.activity-card:focus-visible .activity-tooltip,
+	.activity-card.tooltip-open .activity-tooltip {
+		opacity: 1;
+		visibility: visible;
+		transform: translateY(0);
 	}
 
 	.unstructured-note-block {
