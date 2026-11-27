@@ -78,34 +78,34 @@
 						</div>
 					</div>
 
-					<div class="location-box">
+					<div class="map-embed-wrap">
+						<img
+							src="/tervete-park-map-photo.png"
+							alt="Map of Latvia's State Forests Nature Park in Tērvete showing all six parks"
+							class="map-photo"
+							loading="lazy"
+						/>
+					</div>
+				</div>
+				<!--
+				<div class="location-box">
+					<div class="location-meta">
 						<div class="location-badge">GPS Coordinates</div>
 						<div class="coords">56.4802° N, 23.3853° E</div>
 						<div class="address-text">
-							"Tērvetes sils", Tērvete parish,<br />
-							Dobele municipality, LV-3730, Latvia
+							"Tērvetes sils", Tērvete parish, Dobele municipality, LV-3730, Latvia
 						</div>
-						<a
-							href="https://maps.google.com/?q=Tervete+Nature+Park+Latvia"
-							target="_blank"
-							rel="noopener noreferrer"
-							class="btn-maps"
-						>
-							Open in Google Maps ↗
-						</a>
 					</div>
+					<a
+						href="https://maps.google.com/?q=Tervete+Nature+Park+Latvia"
+						target="_blank"
+						rel="noopener noreferrer"
+						class="btn-maps"
+					>
+						Open in Google Maps ↗
+					</a>
 				</div>
-
-				<div class="map-embed-wrap">
-					<iframe
-						class="map-iframe"
-						title="Interactive map of Latvia's State Forests Nature Park in Tērvete"
-						src="https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1sTervete+Nature+Park,+Latvia!6i14"
-						loading="lazy"
-						referrerpolicy="no-referrer-when-downgrade"
-						allowfullscreen
-					></iframe>
-				</div>
+				-->
 			</div>
 		</div>
 
@@ -332,7 +332,7 @@
 
 	.directions-layout {
 		display: grid;
-		grid-template-columns: 1.4fr 1fr;
+		grid-template-columns: 1fr 1fr;
 		gap: 28px;
 		align-items: center;
 	}
@@ -370,12 +370,24 @@
 	}
 
 	.location-box {
+		margin-top: 24px;
 		background: var(--bg-surface);
 		border: var(--border-width) solid var(--border-color);
 		border-radius: var(--radius-md);
-		padding: 22px;
-		text-align: center;
+		padding: 18px 22px;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		text-align: left;
 		box-shadow: var(--card-shadow);
+	}
+
+	.location-meta {
+		display: flex;
+		flex-direction: column;
+		gap: 2px;
 	}
 
 	.location-badge {
@@ -391,7 +403,7 @@
 		font-size: 1.15rem;
 		font-weight: 800;
 		color: var(--color-forest);
-		margin-bottom: 8px;
+		margin-bottom: 4px;
 		font-family: monospace;
 	}
 
@@ -399,11 +411,12 @@
 		font-size: 0.86rem;
 		color: var(--text-secondary);
 		line-height: 1.4;
-		margin-bottom: 14px;
+		margin-bottom: 0;
 	}
 
 	.btn-maps {
 		display: inline-block;
+		flex-shrink: 0;
 		background: var(--btn-primary-bg);
 		color: var(--btn-primary-text);
 		padding: 8px 20px;
@@ -418,8 +431,15 @@
 		background: var(--btn-primary-hover);
 	}
 
+	@media (max-width: 640px) {
+		.location-box {
+			flex-direction: column;
+			text-align: center;
+			justify-content: center;
+		}
+	}
+
 	.map-embed-wrap {
-		margin-top: 24px;
 		border: var(--border-width) solid var(--border-color);
 		border-radius: var(--radius-md);
 		overflow: hidden;
@@ -427,17 +447,10 @@
 		background: var(--bg-panel-light);
 	}
 
-	.map-iframe {
+	.map-photo {
 		display: block;
 		width: 100%;
-		height: 300px;
-		border: 0;
-	}
-
-	@media (max-width: 640px) {
-		.map-iframe {
-			height: 240px;
-		}
+		height: auto;
 	}
 
 	/* FAQ Accordion */

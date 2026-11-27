@@ -447,7 +447,7 @@
 		border-radius: var(--radius-sm);
 		font-size: 0.82rem;
 		font-weight: 600;
-		cursor: pointer;
+		cursor: default;
 		transition:
 			border-color var(--transition-fast),
 			box-shadow var(--transition-fast),

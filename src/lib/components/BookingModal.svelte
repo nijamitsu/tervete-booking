@@ -6,6 +6,7 @@
 			subtitle: 'Explore at your own pace.',
 			adultPrice: 7.0,
 			childPrice: 5.5,
+			includedTrainRides: 0,
 			features: [
 				{ symbol: '✓', text: 'Access to all six worlds' },
 				{ symbol: '✓', text: 'All included activities' },
@@ -19,10 +20,12 @@
 			badge: 'Popular',
 			adultPrice: 19.0,
 			childPrice: 15.0,
+			includedTrainRides: 3,
 			features: [
 				{ symbol: '✓', text: 'Access to all six worlds' },
 				{ symbol: '✓', text: 'All included activities' },
-				{ symbol: '✓', text: '3 premium activities of your choice' }
+				{ symbol: '✓', text: '3 premium activities of your choice' },
+				{ symbol: '✓', text: '3 Fairytale Train rides included' }
 			]
 		},
 		{
@@ -31,10 +34,12 @@
 			subtitle: 'Make the most of your day.',
 			adultPrice: 29.0,
 			childPrice: 22.0,
+			includedTrainRides: 3,
 			features: [
 				{ symbol: '✓', text: 'Access to all six worlds' },
 				{ symbol: '✓', text: 'All included activities' },
-				{ symbol: '✓', text: 'All eligible premium activities' }
+				{ symbol: '✓', text: 'All eligible premium activities' },
+				{ symbol: '✓', text: '3 Fairytale Train rides included' }
 			]
 		}
 	];
@@ -48,6 +53,7 @@
 			imagePosition: 'center',
 			pricePerNight: 13.0,
 			includesParkEntry: false,
+			includedTrainRides: 0,
 			maxGuests: null,
 			features: [
 				{ symbol: '✓', text: 'Landscaped lakeside tent pitch' },
@@ -65,11 +71,13 @@
 			badge: 'Popular',
 			pricePerNight: 150.0,
 			includesParkEntry: true,
+			includedTrainRides: 3,
 			maxGuests: 4,
 			features: [
 				{ symbol: '✓', text: 'Sleeps up to 4 • private bath & kitchen' },
 				{ symbol: '✓', text: 'Tērvete park entry included for guests' },
 				{ symbol: '✓', text: '3 premium activities of your choice' },
+				{ symbol: '✓', text: '3 Fairytale Train rides included' },
 				{ symbol: '✓', text: 'Private terrace grill & heating' }
 			]
 		},
@@ -81,11 +89,13 @@
 			imagePosition: 'center 55%',
 			pricePerNight: 145.0,
 			includesParkEntry: true,
+			includedTrainRides: 3,
 			maxGuests: 4,
 			features: [
 				{ symbol: '✓', text: 'Sleeps up to 4 • wheelchair accessible' },
 				{ symbol: '✓', text: 'Tērvete park entry included for guests' },
 				{ symbol: '✓', text: '3 premium activities of your choice' },
+				{ symbol: '✓', text: '3 Fairytale Train rides included' },
 				{ symbol: '✓', text: 'Private bath, kitchen & terrace grill' }
 			]
 		}
@@ -100,7 +110,8 @@
 			price: 1.5,
 			perGuest: true,
 			includeUnderSix: true,
-			includedInUnlimited: true
+			includedInUnlimited: false,
+			isCounter: true
 		},
 		{
 			id: 'meals',
@@ -164,8 +175,8 @@
 	let adultsCount = $state(2);
 	let kidsCount = $state(1);
 	let underSixCount = $state(0);
+	let extraTrainRides = $state(0);
 	let selectedExtras = $state({
-		train: false,
 		meals: false,
 		equipment: false,
 		picnic: false,
@@ -213,6 +224,12 @@
 		packageType === 'stay-and-play' ? (selectedAccommodation.maxGuests ?? null) : null
 	);
 	let isAtCabinCapacity = $derived(cabinMaxGuests !== null && totalGuests >= cabinMaxGuests);
+	let includedTrainRides = $derived(
+		packageType === 'day-activities'
+			? (selectedPass.includedTrainRides ?? 0)
+			: (selectedAccommodation.includedTrainRides ?? 0)
+	);
+	let totalTrainRides = $derived(includedTrainRides + extraTrainRides);
 
 	$effect(() => {
 		if (cabinMaxGuests !== null && adultsCount + kidsCount + underSixCount > cabinMaxGuests) {
@@ -256,10 +273,15 @@
 		}
 
 		for (const extra of EXTRA_SERVICES) {
-			if (!isExtraIncluded(extra) && selectedExtras[extra.id]) {
-				const guestCount = extra.includeUnderSix
-					? adultsCount + kidsCount + underSixCount
-					: adultsCount + kidsCount;
+			if (isExtraIncluded(extra)) continue;
+			const guestCount = extra.includeUnderSix
+				? adultsCount + kidsCount + underSixCount
+				: adultsCount + kidsCount;
+			if (extra.isCounter) {
+				if (extraTrainRides > 0) {
+					total += extraTrainRides * (extra.perGuest ? guestCount * extra.price : extra.price);
+				}
+			} else if (selectedExtras[extra.id]) {
 				total += extra.perGuest ? guestCount * extra.price : extra.price;
 			}
 		}
@@ -281,8 +303,8 @@
 		guestName = '';
 		guestEmail = '';
 		guestPhone = '';
+		extraTrainRides = 0;
 		selectedExtras = {
-			train: false,
 			meals: false,
 			equipment: false,
 			picnic: false,
@@ -632,24 +654,95 @@
 							<div class="addons-grid">
 								{#each EXTRA_SERVICES as extra (extra.id)}
 									{@const included = isExtraIncluded(extra)}
-									<label class="addon-option" class:selected={included || selectedExtras[extra.id]}>
-										{#if included}
-											<span class="addon-included-check" aria-hidden="true">✓</span>
-										{:else}
-											<input type="checkbox" bind:checked={selectedExtras[extra.id]} />
-										{/if}
-										<div class="addon-desc">
-											<div class="addon-title-row">
-												<strong>{extra.title}</strong>
-												{#if included}
-													<span class="addon-included-pill">Included in Unlimited</span>
-												{:else}
-													<span class="addon-price">{extra.priceLabel}</span>
-												{/if}
-											</div>
-											<p class="addon-sub">{extra.description}</p>
+									{#if extra.isCounter}
+										<div
+											class="addon-option addon-counter-option"
+											class:selected={included || totalTrainRides > 0}
+										>
+											{#if included}
+												<span class="addon-included-check" aria-hidden="true">✓</span>
+												<div class="addon-desc">
+													<div class="addon-title-row">
+														<strong>{extra.title}</strong>
+														<span class="addon-included-pill">Included in Unlimited</span>
+													</div>
+													<p class="addon-sub">{extra.description}</p>
+												</div>
+											{:else}
+												<div class="addon-desc">
+													<div class="addon-title-row">
+														<strong>{extra.title}</strong>
+														{#if includedTrainRides > 0}
+															<span class="addon-included-pill">
+																{includedTrainRides} included
+															</span>
+														{:else}
+															<span class="addon-price">{extra.priceLabel}</span>
+														{/if}
+													</div>
+													<p class="addon-sub">
+														{extra.description}
+														{#if includedTrainRides > 0}
+															<span class="addon-extra-rate">
+																• Extra rides {extra.priceLabel}
+															</span>
+														{/if}
+													</p>
+													<div class="addon-stepper-row">
+														<span class="addon-stepper-label">
+															{totalTrainRides === 1 ? '1 ride' : `${totalTrainRides} rides`}
+															{#if includedTrainRides > 0 && extraTrainRides > 0}
+																({extraTrainRides} extra)
+															{/if}
+														</span>
+														<div class="addon-stepper">
+															<button
+																type="button"
+																class="btn-addon-step"
+																aria-label="Remove Fairytale Train ride"
+																disabled={extraTrainRides <= 0}
+																onclick={() => extraTrainRides > 0 && extraTrainRides--}
+															>
+																−
+															</button>
+															<span class="addon-step-num">{totalTrainRides}</span>
+															<button
+																type="button"
+																class="btn-addon-step"
+																aria-label="Add Fairytale Train ride"
+																disabled={extraTrainRides >= 20}
+																onclick={() => extraTrainRides < 20 && extraTrainRides++}
+															>
+																+
+															</button>
+														</div>
+													</div>
+												</div>
+											{/if}
 										</div>
-									</label>
+									{:else}
+										<label
+											class="addon-option"
+											class:selected={included || selectedExtras[extra.id]}
+										>
+											{#if included}
+												<span class="addon-included-check" aria-hidden="true">✓</span>
+											{:else}
+												<input type="checkbox" bind:checked={selectedExtras[extra.id]} />
+											{/if}
+											<div class="addon-desc">
+												<div class="addon-title-row">
+													<strong>{extra.title}</strong>
+													{#if included}
+														<span class="addon-included-pill">Included in Unlimited</span>
+													{:else}
+														<span class="addon-price">{extra.priceLabel}</span>
+													{/if}
+												</div>
+												<p class="addon-sub">{extra.description}</p>
+											</div>
+										</label>
+									{/if}
 								{/each}
 							</div>
 						</div>
@@ -755,6 +848,18 @@
 								<span>Accommodation:</span>
 								<strong>
 									{selectedAccommodation.name} (€{selectedAccommodation.pricePerNight}/night)
+								</strong>
+							</div>
+						{/if}
+						{#if totalTrainRides > 0}
+							<div class="summary-line">
+								<span>Fairytale Train:</span>
+								<strong>
+									{totalTrainRides}
+									{totalTrainRides === 1 ? 'ride' : 'rides'}
+									{#if includedTrainRides > 0}
+										({includedTrainRides} included)
+									{/if}
 								</strong>
 							</div>
 						{/if}
@@ -1413,6 +1518,72 @@
 		color: var(--text-secondary);
 		line-height: 1.35;
 		margin: 0;
+	}
+
+	.addon-counter-option {
+		cursor: default;
+	}
+
+	.addon-extra-rate {
+		color: var(--color-forest);
+		font-weight: 600;
+	}
+
+	.addon-stepper-row {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 10px;
+		margin-top: 8px;
+		padding-top: 8px;
+		border-top: 1px solid var(--border-subtle);
+	}
+
+	.addon-stepper-label {
+		font-size: 0.76rem;
+		font-weight: 700;
+		color: var(--color-forest-dark);
+	}
+
+	.addon-stepper {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+	}
+
+	.btn-addon-step {
+		width: 28px;
+		height: 28px;
+		background: var(--bg-surface);
+		border: var(--border-width) solid var(--border-color);
+		border-radius: 50%;
+		font-size: 1rem;
+		font-weight: 800;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		color: var(--text-primary);
+		box-shadow: var(--btn-shadow);
+		cursor: pointer;
+		transition: background var(--transition-fast);
+	}
+
+	.btn-addon-step:hover:not(:disabled) {
+		background: var(--bg-panel);
+	}
+
+	.btn-addon-step:disabled {
+		opacity: 0.38;
+		cursor: not-allowed;
+		box-shadow: none;
+	}
+
+	.addon-step-num {
+		font-size: 0.92rem;
+		font-weight: 800;
+		min-width: 20px;
+		text-align: center;
+		color: var(--text-primary);
 	}
 
 	.inputs-grid {

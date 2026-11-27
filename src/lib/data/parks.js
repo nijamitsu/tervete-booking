@@ -65,7 +65,7 @@ export const PARKS_DATA = [
 		},
 		image: '/ab-park.jpg',
 		themeSentence:
-			'A living storybook inspired by Anna Brigadere’s literary world where visitors encounter folklore characters, magical places, and theatrical tales.',
+			'A living storybook inspired by the literary world of famous Latvian author Anna Brigadere, where visitors encounter folklore characters, magical places, and theatrical tales.',
 		tagline: 'Step inside the story and live the legendary fairytales.',
 		connector: 'The Living Storybook',
 		connectorDescription:
