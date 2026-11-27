@@ -2,12 +2,6 @@
 	import ParkCard from './ParkCard.svelte';
 
 	let { parks, onSelectPark } = $props();
-
-	let activeFilter = $state('all');
-
-	let filteredParks = $derived(
-		activeFilter === 'all' ? parks : parks.filter((p) => p.category === activeFilter)
-	);
 </script>
 
 <section id="parks" class="explore-parks-section">
@@ -22,50 +16,11 @@
 				Tērvete dabas parks is a 1,200-hectare open nature reserve. Explore each park below to see
 				its theme and activities.
 			</p>
-
-			<!-- Filter tabs -->
-			<div class="filter-bar">
-				<button
-					class="filter-tab"
-					class:active={activeFilter === 'all'}
-					onclick={() => (activeFilter = 'all')}
-				>
-					All 6 Worlds
-				</button>
-				<button
-					class="filter-tab"
-					class:active={activeFilter === 'family'}
-					onclick={() => (activeFilter = 'family')}
-				>
-					Family & Crafts
-				</button>
-				<button
-					class="filter-tab"
-					class:active={activeFilter === 'nature'}
-					onclick={() => (activeFilter = 'nature')}
-				>
-					Nature & Stories
-				</button>
-				<button
-					class="filter-tab"
-					class:active={activeFilter === 'active'}
-					onclick={() => (activeFilter = 'active')}
-				>
-					Active & Adventure
-				</button>
-				<button
-					class="filter-tab"
-					class:active={activeFilter === 'relaxation'}
-					onclick={() => (activeFilter = 'relaxation')}
-				>
-					Lake & Waterside
-				</button>
-			</div>
 		</div>
 
 		<!-- 3x2 Grid -->
 		<div class="parks-grid">
-			{#each filteredParks as park (park.id)}
+			{#each parks as park (park.id)}
 				<ParkCard {park} {onSelectPark} />
 			{/each}
 		</div>
@@ -134,38 +89,7 @@
 		font-size: 1.05rem;
 		color: var(--text-secondary);
 		max-width: 600px;
-		margin: 0 auto 24px;
-	}
-
-	.filter-bar {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		justify-content: center;
-		gap: 8px;
-	}
-
-	.filter-tab {
-		background: var(--bg-surface);
-		border: var(--border-width) solid var(--border-color);
-		padding: 7px 18px;
-		border-radius: var(--radius-pill);
-		font-size: 0.86rem;
-		font-weight: 700;
-		color: var(--text-primary);
-		transition: all var(--transition-fast);
-	}
-
-	.filter-tab:hover {
-		background: var(--bg-panel-hover);
-		transform: translateY(-1px);
-	}
-
-	.filter-tab.active {
-		background: var(--btn-primary-bg);
-		color: var(--btn-primary-text);
-		border-color: var(--btn-primary-border);
-		box-shadow: var(--btn-shadow);
+		margin: 0 auto;
 	}
 
 	.parks-grid {

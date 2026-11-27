@@ -291,8 +291,8 @@
 
 	function handleConfirmBooking(e) {
 		e.preventDefault();
-		if (!guestName || !guestEmail) {
-			alert('Please enter your name and email to receive ticket vouchers.');
+		if (!guestName) {
+			alert('Please enter your name to complete the reservation.');
 			return;
 		}
 		isConfirmed = true;
@@ -777,11 +777,10 @@
 									/>
 								</div>
 								<div class="input-field">
-									<label for="guest-email">Email Address *</label>
+									<label for="guest-email">Email Address</label>
 									<input
 										id="guest-email"
 										type="email"
-										required
 										placeholder="tickets@example.com"
 										bind:value={guestEmail}
 									/>
@@ -833,8 +832,12 @@
 					<div class="conf-badge-pill">Reservation Confirmed</div>
 					<h3 class="conf-title">Reservation Confirmed!</h3>
 					<p class="conf-message">
-						Thank you, <strong>{guestName}</strong>! Your booking confirmation and QR codes have
-						been prepared for <strong>{guestEmail}</strong>.
+						Thank you, <strong>{guestName}</strong>! Your booking confirmation and QR codes
+						{#if guestEmail}
+							have been prepared for <strong>{guestEmail}</strong>.
+						{:else}
+							are ready below.
+						{/if}
 					</p>
 
 					<div class="conf-summary-card">
