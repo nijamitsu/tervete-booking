@@ -16,7 +16,7 @@
 		<h1 class="hero-title">Discover the Park of Parks</h1>
 
 		<!-- Value Proposition -->
-		<p class="hero-description">Six parks, different experiences in one location.</p>
+		<p class="hero-description">Six unique worlds to explore, all in one place.</p>
 	</div>
 </section>
 

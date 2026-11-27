@@ -17,7 +17,7 @@
 
 		<!-- Wireframe Subtitles -->
 		<!-- <p class="hero-lead">Endless adventure, joy, and fun</p> -->
-		<p class="hero-description">Six parks, each designed for a different kind of experience.</p>
+		<p class="hero-description">Six unique worlds to explore, all in one place.</p>
 
 		<!-- Interactive CTAs -->
 		<!--

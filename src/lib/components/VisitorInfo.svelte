@@ -95,6 +95,17 @@
 						</a>
 					</div>
 				</div>
+
+				<div class="map-embed-wrap">
+					<iframe
+						class="map-iframe"
+						title="Interactive map of Latvia's State Forests Nature Park in Tērvete"
+						src="https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1sTervete+Nature+Park,+Latvia!6i14"
+						loading="lazy"
+						referrerpolicy="no-referrer-when-downgrade"
+						allowfullscreen
+					></iframe>
+				</div>
 			</div>
 		</div>
 
@@ -405,6 +416,28 @@
 
 	.btn-maps:hover {
 		background: var(--btn-primary-hover);
+	}
+
+	.map-embed-wrap {
+		margin-top: 24px;
+		border: var(--border-width) solid var(--border-color);
+		border-radius: var(--radius-md);
+		overflow: hidden;
+		box-shadow: var(--card-shadow);
+		background: var(--bg-panel-light);
+	}
+
+	.map-iframe {
+		display: block;
+		width: 100%;
+		height: 300px;
+		border: 0;
+	}
+
+	@media (max-width: 640px) {
+		.map-iframe {
+			height: 240px;
+		}
 	}
 
 	/* FAQ Accordion */

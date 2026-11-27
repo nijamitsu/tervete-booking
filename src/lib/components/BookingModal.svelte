@@ -44,6 +44,8 @@
 			id: 'tent',
 			name: 'Tent Sites',
 			subtitle: 'Bring your own tent to the lakeside campsite.',
+			image: 'campsite.jpg',
+			imagePosition: 'center',
 			pricePerNight: 13.0,
 			includesParkEntry: false,
 			maxGuests: null,
@@ -58,6 +60,8 @@
 			id: 'treehouse',
 			name: 'Treehouses',
 			subtitle: 'Heated pine-canopy cabin overlooking the lake.',
+			image: '/treehouses.jpg',
+			imagePosition: 'center 35%',
 			badge: 'Popular',
 			pricePerNight: 150.0,
 			includesParkEntry: true,
@@ -73,6 +77,8 @@
 			id: 'underground',
 			name: 'Underground Cabins',
 			subtitle: 'Cozy fairytale earth cabin on a single level.',
+			image: '/underground-cabins.jpg',
+			imagePosition: 'center 55%',
 			pricePerNight: 145.0,
 			includesParkEntry: true,
 			maxGuests: 4,
@@ -385,41 +391,74 @@
 											type="button"
 											role="radio"
 											aria-checked={selectedAccommodationId === acc.id}
-											class="pass-card"
+											class="pass-card acc-card"
 											class:active={selectedAccommodationId === acc.id}
 											onclick={() => (selectedAccommodationId = acc.id)}
 										>
-											<div class="pass-card-top">
-												<div class="pass-name-row">
-													<strong class="pass-name">{acc.name}</strong>
-													{#if acc.badge}
-														<span class="pass-badge">{acc.badge}</span>
-													{/if}
-												</div>
-												<span class="pass-subtitle">{acc.subtitle}</span>
-												<div class="pass-price-line">
-													<strong>€{acc.pricePerNight.toFixed(0)}</strong>
-													<span>/ night</span>
-												</div>
+											<div class="acc-media">
+												{#if acc.image}
+													<img
+														src={acc.image}
+														alt={acc.name}
+														class="acc-photo"
+														style:object-position={acc.imagePosition}
+														loading="lazy"
+													/>
+												{:else}
+													<div class="acc-photo-placeholder" aria-hidden="true">
+														<svg
+															width="28"
+															height="28"
+															viewBox="0 0 24 24"
+															fill="none"
+															stroke="currentColor"
+															stroke-width="1.75"
+															stroke-linecap="round"
+															stroke-linejoin="round"
+														>
+															<path d="M3.5 21 12 4l8.5 17" />
+															<path d="M2 21h20" />
+															<path d="M12 13v8" />
+															<path d="M9.5 21 12 15l2.5 6" />
+														</svg>
+														<span>Photo coming soon</span>
+													</div>
+												{/if}
 											</div>
 
-											<ul class="pass-features">
-												{#each acc.features as feature (feature.text)}
-													<li class="pass-feature-item">
-														<span
-															class="pass-feature-symbol"
-															class:is-plus={feature.symbol === '+'}
-														>
-															{feature.symbol}
-														</span>
-														<span>{feature.text}</span>
-													</li>
-												{/each}
-											</ul>
+											<div class="acc-card-body">
+												<div class="pass-card-top">
+													<div class="pass-name-row">
+														<strong class="pass-name">{acc.name}</strong>
+														{#if acc.badge}
+															<span class="pass-badge">{acc.badge}</span>
+														{/if}
+													</div>
+													<span class="pass-subtitle">{acc.subtitle}</span>
+													<div class="pass-price-line">
+														<strong>€{acc.pricePerNight.toFixed(0)}</strong>
+														<span>/ night</span>
+													</div>
+												</div>
 
-											<span class="pass-select-btn">
-												{selectedAccommodationId === acc.id ? '✓ Selected' : 'Select stay'}
-											</span>
+												<ul class="pass-features">
+													{#each acc.features as feature (feature.text)}
+														<li class="pass-feature-item">
+															<span
+																class="pass-feature-symbol"
+																class:is-plus={feature.symbol === '+'}
+															>
+																{feature.symbol}
+															</span>
+															<span>{feature.text}</span>
+														</li>
+													{/each}
+												</ul>
+
+												<span class="pass-select-btn">
+													{selectedAccommodationId === acc.id ? '✓ Selected' : 'Select stay'}
+												</span>
+											</div>
 										</button>
 									{/each}
 								</div>
@@ -900,6 +939,62 @@
 		box-shadow:
 			0 0 0 1px var(--color-forest),
 			var(--card-shadow);
+	}
+
+	.pass-card.acc-card {
+		padding: 0;
+		overflow: hidden;
+	}
+
+	.acc-media {
+		width: 100%;
+		height: 136px;
+		overflow: hidden;
+		background: var(--bg-panel);
+		border-bottom: 1px solid var(--border-subtle);
+		flex-shrink: 0;
+	}
+
+	.acc-photo {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: transform 0.3s ease;
+	}
+
+	.pass-card.acc-card:hover .acc-photo {
+		transform: scale(1.04);
+	}
+
+	.acc-photo-placeholder {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 6px;
+		background: linear-gradient(135deg, var(--bg-panel-light) 0%, #e4eee8 100%);
+		color: var(--color-forest);
+	}
+
+	.acc-photo-placeholder svg {
+		opacity: 0.7;
+	}
+
+	.acc-photo-placeholder span {
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.02em;
+		opacity: 0.75;
+	}
+
+	.acc-card-body {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		padding: 14px;
 	}
 
 	.pass-card-top {
