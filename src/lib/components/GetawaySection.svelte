@@ -18,7 +18,7 @@
 			{#each getaways as getaway (getaway.id)}
 				<div class="getaway-card" class:is-featured={getaway.id === 'stay-and-play'}>
 					<div class="getaway-badge-row">
-						<span class="getaway-type-badge">{getaway.badge}</span>
+						<!--<span class="getaway-type-badge">{getaway.badge}</span>-->
 						<span class="getaway-best-for">{getaway.bestFor}</span>
 					</div>
 

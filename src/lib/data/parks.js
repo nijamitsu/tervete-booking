@@ -306,7 +306,7 @@ export const GETAWAYS_DATA = [
 	},
 	{
 		id: 'stay-and-play',
-		title: 'Lakeside Stay & Play',
+		title: 'Park & Accomodation',
 		badge: 'Getaway Package',
 		subtitle: 'Overnight glamping and extended exploration',
 		summary:

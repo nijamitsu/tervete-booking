@@ -90,8 +90,8 @@
 							onclick={() => (packageType = 'day-activities')}
 						>
 							<div class="tab-text">
-								<strong>Only park Activities</strong>
-								<span>Single-day access from €7</span>
+								<strong>General Park Admission</strong>
+								<!--<span>Single-day access from €7</span>-->
 							</div>
 						</button>
 
@@ -102,7 +102,7 @@
 						>
 							<div class="tab-text">
 								<strong>Activities & Accommodation</strong>
-								<span>Glamping escape from €65</span>
+								<!--<span>Glamping escape from €65</span>-->
 							</div>
 						</button>
 					</div>

@@ -101,8 +101,8 @@
 							onclick={() => (packageType = 'stay-and-play')}
 						>
 							<div class="tab-text">
-								<strong>Activities & Accommodation</strong>
-								<span>Glamping escape from €65</span>
+								<strong>Park & Accommodation</strong>
+								<!--<span>Glamping escape from €65</span>-->
 							</div>
 						</button>
 					</div>
