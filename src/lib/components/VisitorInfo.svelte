@@ -8,7 +8,7 @@
 		},
 		{
 			q: 'Can I bring dogs or pets into the park?',
-			a: 'Yes! Well-behaved dogs on leashes are warmly welcome in the main Tērvete Nature Park, Anna Brigadere Park, and around the reservoir. Pets are not permitted on the elevated nets in The Living Forest or inside the quiet trail butterfly greenhouse.'
+			a: 'Yes! Well-behaved dogs on leashes are warmly welcome in the main Tērvete Nature Park, Anna Brigadere Park, and around the reservoir. Pets are not permitted on the elevated nets in The Living Forest or inside The Riverside Chill butterfly greenhouse.'
 		},
 		{
 			q: 'Are the trails suitable for strollers and wheelchairs?',
@@ -16,7 +16,7 @@
 		},
 		{
 			q: 'What happens if it rains during our visit?',
-			a: 'Tērvete is a dense pine forest that offers natural canopy cover. Additionally, there are numerous cozy wooden shelters, the indoor tropical greenhouse at The Quiet Trail, covered cafes, and dwarf cottages where you can stay dry. Our ticket booking allows free date re-scheduling up to 24 hours prior.'
+			a: 'Tērvete is a dense pine forest that offers natural canopy cover. Additionally, there are numerous cozy wooden shelters, the indoor tropical greenhouse at The Riverside Chill, covered cafes, and dwarf cottages where you can stay dry. Our ticket booking allows free date re-scheduling up to 24 hours prior.'
 		},
 		{
 			q: 'How does the lakeside glamping check-in work?',
@@ -33,7 +33,6 @@
 	<div class="visitor-container">
 		<!-- Section Header -->
 		<div class="visitor-header">
-			<span class="sub-tag">Plan Your Visit</span>
 			<h2 class="visitor-title">Contact</h2>
 			<p class="visitor-lead">
 				Everything you need to know for a seamless day of discovery in Tērvete.
@@ -42,70 +41,7 @@
 
 		<!-- Pricing & Schedule Grid -->
 		<div id="pricing" class="info-cards-grid">
-			<!-- Operating Hours Card -->
-			<div class="info-card">
-				<div class="card-icon-title">
-					<h3>Seasonal Opening Hours</h3>
-				</div>
-				<ul class="hours-schedule">
-					<li class="schedule-item">
-						<span>Main Nature Park & Trails:</span>
-						<strong>Daily 09:00 – 18:00</strong>
-					</li>
-					<li class="schedule-item">
-						<span>The Living Forest:</span>
-						<strong>Daily 10:00 – 19:00</strong>
-					</li>
-					<li class="schedule-item">
-						<span>The Quiet Trail:</span>
-						<strong>Tue–Sun 10:00 – 17:00</strong>
-					</li>
-					<li class="schedule-item">
-						<span>The Enchanted Train:</span>
-						<strong>Weekends & Holidays 10:00 – 17:30</strong>
-					</li>
-					<li class="schedule-item">
-						<span>The Lakeside Haven:</span>
-						<strong>24/7 (Check-in 15:00)</strong>
-					</li>
-				</ul>
-				<div class="card-footer-tip">
-					<span>Tip: Park grounds remain accessible until dusk for peaceful evening strolls.</span>
-				</div>
-			</div>
 
-			<!-- Ticket Prices & Discounts Card -->
-			<div class="info-card">
-				<div class="card-icon-title">
-					<h3>Admission & Special Rates</h3>
-				</div>
-				<div class="price-table">
-					<div class="table-row">
-						<span>Adult Entry</span>
-						<strong>€7.00</strong>
-					</div>
-					<div class="table-row">
-						<span>Students, Seniors & Disabled (Grp 3)</span>
-						<strong>€5.50</strong>
-					</div>
-					<div class="table-row">
-						<span>Children under 7 years</span>
-						<strong class="green-text">FREE</strong>
-					</div>
-					<div class="table-row">
-						<span>Family Ticket (3+ Goda ģimene card)</span>
-						<strong>€20.00 / family</strong>
-					</div>
-					<div class="table-row">
-						<span>Park Car Parking (all day)</span>
-						<strong>€5.00</strong>
-					</div>
-					<div class="table-row">
-						<span>Net Park 55-Min Jump Pass</span>
-						<strong>€10.00</strong>
-					</div>
-				</div>
-			</div>
 
 			<!-- Location & How to Get Here -->
 			<div class="info-card full-width">
@@ -225,7 +161,7 @@
 					<li><a href="#parks">Anna Brigadere Park</a></li>
 					<li><a href="#parks">The Adventure Heights</a></li>
 					<li><a href="#parks">The Living Forest</a></li>
-					<li><a href="#parks">The Quiet Trail</a></li>
+					<li><a href="#parks">The Riverside Chill</a></li>
 					<li><a href="#parks">The Lakeside Haven</a></li>
 				</ul>
 			</div>

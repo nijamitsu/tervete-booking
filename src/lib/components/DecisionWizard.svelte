@@ -77,10 +77,10 @@
 					'The Dwarf Village',
 					'Anna Brigadere Park & Sprite Trail',
 					'The Enchanted Train Ride',
-					'The Quiet Trail'
+					'The Riverside Chill'
 				],
 				reason:
-					'Little legs will love the miniature dwarf houses, climbing into wooden castles, riding the electric train, and seeing exotic butterflies along the quiet trail.',
+					'Little legs will love the miniature dwarf houses, climbing into wooden castles, riding the electric train, and seeing exotic butterflies at The Riverside Chill.',
 				priceEstimate: '€20 Family Pass (Free under 7)'
 			};
 		} else {
@@ -91,7 +91,7 @@
 				badge: 'Relaxed Day Out',
 				recommendedParks: [
 					'Anna Brigadere Park & Wooden Sculptures',
-					'The Quiet Trail',
+					'The Riverside Chill',
 					'The Lakeside Haven Walk'
 				],
 				reason:

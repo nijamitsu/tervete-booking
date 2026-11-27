@@ -65,7 +65,13 @@
 			onclick={toggleMobileExpand}
 			aria-label="Toggle activities for {park.name}"
 		>
-			<span>{isMobileExpanded ? 'Hide Activities' : 'See Included & Premium Activities'}</span>
+			<span>
+				{isMobileExpanded
+					? 'Hide Activities'
+					: park.hideCardPremium
+						? 'See Included Activities'
+						: 'See Included & Premium Activities'}
+			</span>
 			<svg
 				width="14"
 				height="14"
@@ -113,20 +119,29 @@
 				</ul>
 			</div>
 
-			<!-- Premium Activities -->
-			<div class="activity-group premium-group">
-				<div class="group-header">
-					<span class="group-badge premium-badge">★ Premium Activities</span>
+			{#if !park.hideCardPremium && park.premiumActivities?.length}
+				<!-- Premium Activities -->
+				<div class="activity-group premium-group">
+					<div class="group-header">
+						<span class="group-badge premium-badge">★ Premium Activities</span>
+					</div>
+					<ul class="activities-list">
+						{#each park.premiumActivities.slice(0, 3) as item (item)}
+							<li class="activity-item">
+								<span class="bullet-star">•</span>
+								<span class="activity-text">{item}</span>
+							</li>
+						{/each}
+					</ul>
 				</div>
-				<ul class="activities-list">
-					{#each park.premiumActivities.slice(0, 3) as item (item)}
-						<li class="activity-item">
-							<span class="bullet-star">•</span>
-							<span class="activity-text">{item}</span>
-						</li>
-					{/each}
-				</ul>
-			</div>
+			{:else if park.cardNote}
+				<div class="activity-group note-group">
+					<div class="group-header">
+						<span class="group-badge premium-badge">{park.cardNote.badge}</span>
+					</div>
+					<p class="card-note-text">{park.cardNote.text}</p>
+				</div>
+			{/if}
 		</div>
 
 		<div class="detail-footer">
@@ -411,6 +426,18 @@
 		border: 1px solid var(--border-subtle);
 		border-radius: var(--radius-sm);
 		padding: 8px 10px;
+	}
+
+	.note-group {
+		background: var(--card-theme-bg);
+		border-color: var(--card-theme-border);
+	}
+
+	.card-note-text {
+		font-size: 0.78rem;
+		line-height: 1.45;
+		color: var(--text-secondary);
+		font-weight: 500;
 	}
 
 	.group-header {

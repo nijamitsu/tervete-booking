@@ -53,7 +53,7 @@ export const PARKS_DATA = [
 		name: 'Tērvete Net Park',
 		originalName: 'Tērvetes Tīklu parks',
 		wireframeName: 'Park 3',
-		image: '/net-park.jpg',
+		image: '/ab-park.jpg',
 		status: 'open',
 		statusText: 'Open',
 		hours: '10:00 - 19:00',

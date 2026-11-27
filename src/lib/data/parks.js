@@ -63,7 +63,7 @@ export const PARKS_DATA = [
 			borderTint: '#FDE68A',
 			shadowTint: 'rgba(217, 119, 6, 0.16)'
 		},
-		image: '/net-park.jpg',
+		image: '/ab-park.jpg',
 		themeSentence:
 			'A living storybook inspired by Anna Brigadere’s literary world where visitors encounter folklore characters, magical places, and theatrical tales.',
 		tagline: 'Step inside the story and live the legendary fairytales.',
@@ -191,7 +191,7 @@ export const PARKS_DATA = [
 	},
 	{
 		id: 5,
-		name: 'The Quiet Trail',
+		name: 'The Riverside Chill',
 		originalName: 'Tērvetes Tauriņi & Miera taka',
 		wireframeName: 'Park 5',
 		worldId: 'World 05',
@@ -207,32 +207,24 @@ export const PARKS_DATA = [
 		},
 		image: '/quiet-trail.jpg',
 		themeSentence:
-			'A gentle journey through mindful forest paths and sensory installations designed for slowing down, resting, and reconnecting with nature.',
+			'A calm riverside retreat of shaded paths, quiet decks, and sensory spots designed for slowing down, resting, and reconnecting with nature.',
 		tagline: 'Slow down, listen, breathe, and reconnect.',
 		connector: 'Moments of Pause',
 		connectorDescription:
-			'A sequence of sensory installations offers simple invitations: listen through acoustic horns, breathe in pine scents, rest in hammocks, and wander at your own pace.',
+			'Follow the gentle pace of the river with simple invitations to pause, listen to the water and pines, relax in riverside hammocks, and linger at your own rhythm.',
 		visualCues:
-			'Sage green and warm light wood, circular resting decks, hammocks, listening horns, minimal poetic prompts, landscape frames, quiet seating.',
+			'Warm timber and soft earth tones, riverside resting decks, hammocks, gentle river views, quiet seating, and natural shade.',
 		ageGroup: 'All Ages • Solo Visitors, Couples & Wellbeing Seekers',
 		includedActivities: [
 			'Scenic Walking Trails & Wooden Boardwalks',
-			'Forest Viewpoints & Landscape Framing Stations',
-			'Self-guided Sensory & Mindfulness Trail',
-			'Forest Listening Walk (Acoustic Horns)',
-			'Hammock Relaxation Groves & Daybeds',
-			'Quiet Reading Spaces & Pine Benches',
-			'Seasonal Nature Reflection Trail'
+			'Forest Viewpoints & Landscape Framing Stations'
 		],
-		premiumActivities: [
-			'Guided Forest Bathing (Shinrin-yoku)',
-			'Forest Yoga & Breathwork Sessions',
-			'Guided Meditation in Pine Glades',
-			'Mindful Nature Photography Workshop',
-			'Forest Sound Journey & Sound Healing',
-			'Nature-based Wellbeing Workshop',
-			'Sunrise & Sunset Mindfulness Walks'
-		],
+		hideCardPremium: true,
+		cardNote: {
+			badge: 'Unstructured Space',
+			text: 'Designed as an unstructured riverside area to simply unwind at your own pace, with no schedules or paid add-ons, just quiet river views and shaded paths to roam and chill freely.'
+		},
+		premiumActivities: [],
 		addOns: 'Picnic baskets and reserved resting pavilions',
 		category: 'nature'
 	},
@@ -254,7 +246,7 @@ export const PARKS_DATA = [
 		},
 		image: '/glamping.jpeg',
 		themeSentence:
-			'A welcoming waterside retreat where forest meets lake for boating, relaxed recreation, shared meals, and evening campfires under the stars.',
+			'A welcoming waterside retreat where forest meets lake, featuring comfortable stays and spaces for boating, laid-back recreation, shared meals, and evening campfires under the stars.',
 		tagline: 'Share meaningful moments by the water from sunrise to campfire.',
 		connector: 'From Water to Fire',
 		connectorDescription:

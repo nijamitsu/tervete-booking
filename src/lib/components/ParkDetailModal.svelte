@@ -78,21 +78,31 @@
 					</div>
 				</div>
 
-				<!-- Premium Activities -->
-				<div class="content-block">
-					<div class="section-badge-header">
-						<span class="badge-pill premium-pill">★ Premium Activities & Experiences</span>
-						<span class="badge-sub">Special workshops, equipment & guided tours</span>
+				{#if !park.hideCardPremium && park.premiumActivities?.length}
+					<!-- Premium Activities -->
+					<div class="content-block">
+						<div class="section-badge-header">
+							<span class="badge-pill premium-pill">★ Premium Activities & Experiences</span>
+							<span class="badge-sub">Special workshops, equipment & guided tours</span>
+						</div>
+						<div class="activities-grid">
+							{#each park.premiumActivities as item (item)}
+								<div class="activity-card premium-card">
+									<span class="star-icon">•</span>
+									<span class="card-item-text">{item}</span>
+								</div>
+							{/each}
+						</div>
 					</div>
-					<div class="activities-grid">
-						{#each park.premiumActivities as item (item)}
-							<div class="activity-card premium-card">
-								<span class="star-icon">•</span>
-								<span class="card-item-text">{item}</span>
-							</div>
-						{/each}
+				{:else if park.cardNote}
+					<div class="content-block unstructured-note-block">
+						<div class="section-badge-header">
+							<span class="badge-pill premium-pill">{park.cardNote.badge}</span>
+							<span class="badge-sub">No paid add-ons or scheduled sessions</span>
+						</div>
+						<p class="unstructured-note-text">{park.cardNote.text}</p>
 					</div>
-				</div>
+				{/if}
 
 				<!-- Wayfinding & Visual Identity -->
 				{#if park.visualCues}
@@ -423,6 +433,20 @@
 	.card-item-text {
 		color: var(--text-primary);
 		line-height: 1.35;
+	}
+
+	.unstructured-note-block {
+		background: var(--modal-theme-bg);
+		border: 1px solid var(--modal-theme-border);
+		border-radius: var(--radius-md);
+		padding: 14px 16px;
+	}
+
+	.unstructured-note-text {
+		font-size: 0.86rem;
+		line-height: 1.5;
+		color: var(--text-secondary);
+		font-weight: 500;
 	}
 
 	.cues-block {
