@@ -288,7 +288,7 @@ export const GETAWAYS_DATA = [
 		price: 'From €7.00',
 		priceUnit: 'per visitor (Free under 7)',
 		features: [
-			'Unlimited walking access to all 6 themed park worlds',
+			'Unlimited access to all 6 themed park worlds',
 			'Full access to all included activities, discovery stations, and playgrounds',
 			'Picnic sites, campfire areas, and boardwalk trails throughout the 1,200 ha forest',
 			'Option to join premium ranger workshops, boat rentals & obstacle tracks on-site'
@@ -298,21 +298,21 @@ export const GETAWAYS_DATA = [
 	},
 	{
 		id: 'stay-and-play',
-		title: 'Park & Accomodation',
+		title: 'Park & Accommodation',
 		badge: 'Getaway Package',
-		subtitle: 'Overnight glamping and extended exploration',
+		subtitle: 'Lakeside campsites, treehouses, and underground cabins',
 		summary:
-			'The complete Tērvete experience. Sleep in heated eco-glamping pods at The Lakeside Haven with multi-day park passes, boat rentals, and private campfire facilities included.',
-		price: 'From €65.00',
-		priceUnit: 'per night (sleeps up to 4)',
+			'Choose between a landscaped lakeside campsite, heated pine-canopy treehouses, or cozy single-level underground cabins for a flexible multi-night Tērvete escape.',
+		price: 'From €13.00',
+		priceUnit: 'per night',
 		features: [
-			'Overnight stay in a heated wooden eco-pod at The Lakeside Haven',
-			'Multi-day unlimited access across all 6 park worlds',
-			'Complimentary 1-hour rowboat or SUP board rental on the lake',
-			'Private campfire pit with dry birch firewood',
-			'Special priority access to seasonal workshops and evening events'
+			'Unlimited access to all 6 themed park worlds',
+			'Full access to all included activities, discovery stations, and playgrounds',
+			'Choice of campsite, heated Treehouses, or wheelchair-accessible Underground Cabins',
+			'3 premium activities of your choice included with cabin stays',
+			'3 Fairytale Train rides included with Treehouses & Underground Cabins'
 		],
-		ctaText: 'Reserve Glamping Stay',
+		ctaText: 'Reserve Stay',
 		ctaNote: 'Check-in 15:00 • Check-out 12:00'
 	}
 ];

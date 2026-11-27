@@ -110,7 +110,22 @@
 				<div class="header-tag">
 					<span>Trip Matchmaker</span>
 				</div>
-				<button class="btn-close" onclick={onClose} aria-label="Close modal">✕</button>
+				<button type="button" class="btn-close" onclick={onClose} aria-label="Close modal">
+					<svg
+						width="18"
+						height="18"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
+						<path d="M18 6 6 18" />
+						<path d="m6 6 12 12" />
+					</svg>
+				</button>
 			</div>
 
 			<!-- Progress Indicators -->
@@ -343,19 +358,24 @@
 	.btn-close {
 		width: 32px;
 		height: 32px;
-		background: var(--bg-surface);
-		border: var(--border-width) solid var(--border-color);
+		padding: 0;
+		background: transparent;
+		border: none;
 		border-radius: 50%;
-		font-weight: 800;
-		display: flex;
+		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		color: var(--text-primary);
-		transition: background var(--transition-fast);
+		color: var(--text-secondary);
+		cursor: pointer;
+		flex-shrink: 0;
+		transition:
+			background var(--transition-fast),
+			color var(--transition-fast);
 	}
 
 	.btn-close:hover {
-		background: #ffeded;
+		background: rgba(0, 41, 27, 0.08);
+		color: var(--color-forest-dark);
 	}
 
 	.wizard-progress {

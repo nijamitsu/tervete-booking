@@ -8,7 +8,7 @@
 			childPrice: 5.5,
 			includedTrainRides: 0,
 			features: [
-				{ symbol: '✓', text: 'Access to all six worlds' },
+				{ symbol: '✓', text: 'Access to all six parks' },
 				{ symbol: '✓', text: 'All included activities' },
 				{ symbol: '+', text: 'Premium activities sold separately' }
 			]
@@ -22,7 +22,7 @@
 			childPrice: 15.0,
 			includedTrainRides: 3,
 			features: [
-				{ symbol: '✓', text: 'Access to all six worlds' },
+				{ symbol: '✓', text: 'Access to all six parks' },
 				{ symbol: '✓', text: 'All included activities' },
 				{ symbol: '✓', text: '3 premium activities of your choice' },
 				{ symbol: '✓', text: '3 Fairytale Train rides included' }
@@ -36,7 +36,7 @@
 			childPrice: 22.0,
 			includedTrainRides: 3,
 			features: [
-				{ symbol: '✓', text: 'Access to all six worlds' },
+				{ symbol: '✓', text: 'Access to all six parks' },
 				{ symbol: '✓', text: 'All included activities' },
 				{ symbol: '✓', text: 'All eligible premium activities' },
 				{ symbol: '✓', text: '3 Fairytale Train rides included' }
@@ -47,7 +47,7 @@
 	const ACCOMMODATION_OPTIONS = [
 		{
 			id: 'tent',
-			name: 'Tent Sites',
+			name: 'Campsite',
 			subtitle: 'Bring your own tent to the lakeside campsite.',
 			image: 'campsite.jpg',
 			imagePosition: 'center',
@@ -324,7 +324,22 @@
 					<h3 class="dialog-title">Tērvete Ticket & Getaway Booking</h3>
 					<span class="dialog-sub">Instant confirmation • Free cancellation up to 24h prior</span>
 				</div>
-				<button class="btn-dialog-close" onclick={onClose} aria-label="Close booking">✕</button>
+				<button type="button" class="btn-dialog-close" onclick={onClose} aria-label="Close booking">
+					<svg
+						width="18"
+						height="18"
+						viewBox="0 0 24 24"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+						stroke-linejoin="round"
+						aria-hidden="true"
+					>
+						<path d="M18 6 6 18" />
+						<path d="m6 6 12 12" />
+					</svg>
+				</button>
 			</div>
 
 			{#if !isConfirmed}
@@ -935,20 +950,24 @@
 	.btn-dialog-close {
 		width: 32px;
 		height: 32px;
-		background: var(--bg-surface);
-		border: var(--border-width) solid var(--border-color);
+		padding: 0;
+		background: transparent;
+		border: none;
 		border-radius: 50%;
-		font-weight: 800;
-		display: flex;
+		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		color: var(--text-primary);
+		color: var(--text-secondary);
 		cursor: pointer;
-		transition: background var(--transition-fast);
+		flex-shrink: 0;
+		transition:
+			background var(--transition-fast),
+			color var(--transition-fast);
 	}
 
 	.btn-dialog-close:hover {
-		background: #ffeded;
+		background: rgba(0, 41, 27, 0.08);
+		color: var(--color-forest-dark);
 	}
 
 	.dialog-body {
