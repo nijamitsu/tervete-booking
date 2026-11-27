@@ -55,29 +55,17 @@
 
 		<!-- Desktop Navigation Links -->
 		<nav class="nav-links">
-			<a href="#parks" class="nav-link">destinations</a>
-			<a href="#getaways" class="nav-link">getaways</a>
-			<a href="#pricing" class="nav-link">tickets</a>
-			<a href="#info" class="nav-link">visitor info</a>
+			<a href="#parks" class="nav-link">Parks</a>
+			<a href="#getaways" class="nav-link">Tickets</a>
+			<a href="#pricing" class="nav-link">Contact</a>
+			<a href="#info" class="nav-link">FAQ</a>
 		</nav>
 
 		<!-- Right Action Buttons -->
 		<div class="nav-actions">
 			<button class="btn-book" onclick={() => onOpenBooking()}>
 				<span>Book Tickets</span>
-				<svg
-					width="16"
-					height="16"
-					viewBox="0 0 24 24"
-					fill="none"
-					stroke="currentColor"
-					stroke-width="2.5"
-					stroke-linecap="round"
-					stroke-linejoin="round"
-				>
-					<path d="M5 12h14" />
-					<path d="m12 5 7 7-7 7" />
-				</svg>
+				
 			</button>
 
 			<!-- Mobile menu toggle -->

@@ -31,9 +31,10 @@
 	<!-- Front / Standard View -->
 	<div class="card-standard-view">
 		<div class="card-badge-row">
-			<span class="zone-badge">
+			<!--<span class="zone-badge">
 				{park.worldId || 'Open Zone'}
 			</span>
+			-->
 		</div>
 
 		<div class="card-image-wrapper">

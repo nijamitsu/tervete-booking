@@ -71,6 +71,7 @@
 		</div>
 
 		<!-- Bottom summary bar -->
+		<!--
 		<div class="parks-grid-footer">
 			<div class="footer-note">
 				<span class="note-bullet">Unenclosed Reserve:</span>
@@ -84,6 +85,7 @@
 				<span class="stat-pill">6 Themed Worlds to Discover</span>
 			</div>
 		</div>
+		-->
 	</div>
 </section>
 

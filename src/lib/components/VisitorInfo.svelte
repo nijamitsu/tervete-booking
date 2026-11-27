@@ -34,7 +34,7 @@
 		<!-- Section Header -->
 		<div class="visitor-header">
 			<span class="sub-tag">Plan Your Visit</span>
-			<h2 class="visitor-title">Practical Information & FAQ</h2>
+			<h2 class="visitor-title">Contact</h2>
 			<p class="visitor-lead">
 				Everything you need to know for a seamless day of discovery in Tērvete.
 			</p>

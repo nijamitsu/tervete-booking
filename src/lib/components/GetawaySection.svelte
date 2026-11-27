@@ -6,7 +6,7 @@
 	<div class="getaways-container">
 		<!-- Section Title -->
 		<div class="getaways-header">
-			<h2 class="getaways-title">Find your perfect gettaway</h2>
+			<h2 class="getaways-title">Find your perfect getaway</h2>
 			<p class="getaways-subtitle">
 				Choose whether you want an exhilarating single-day adventure or an immersive overnight
 				escape surrounded by centuries-old pine trees.

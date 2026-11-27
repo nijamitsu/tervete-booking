@@ -96,7 +96,7 @@
 		<!-- 3. Explore the Parks (wireframe gray container with 3x2 grid and hover interaction) -->
 		<ParksGrid parks={PARKS_DATA} onSelectPark={handleSelectPark} onBookPark={handleBookPark} />
 
-		<!-- 4. Find your perfect gettaway (wireframe two cards with "+" buttons and "help me decide") -->
+		<!-- 4. Find your perfect getaway (wireframe two cards with "+" buttons and "help me decide") -->
 		<GetawaySection
 			getaways={GETAWAYS_DATA}
 			onSelectGetaway={handleSelectGetaway}
